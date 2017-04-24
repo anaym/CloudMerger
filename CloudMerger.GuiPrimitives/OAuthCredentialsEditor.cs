@@ -10,15 +10,15 @@ namespace CloudMerger.GuiPrimitives
 {
     public static class OAuthCredentialsEditor
     {
-        public static Task<OAuthCredentials> ShowNew(IService[] services)
+        public static Task<OAuthCredentials> ShowNew(IHostingManager[] hostingManagers)
         {
-            return ShowNew(new OAuthCredentials(), services);
+            return ShowNew(new OAuthCredentials(), hostingManagers);
         }
 
-        public static async Task<OAuthCredentials> ShowNew(OAuthCredentials input, IService[] services)
+        public static async Task<OAuthCredentials> ShowNew(OAuthCredentials input, IHostingManager[] hostingManagers)
         {
             var result = new OAuthCredentials();
-            StaApplication.StartNew(() => new OAuthCredentialsForm(input, services, result)).Join();
+            StaApplication.StartNew(() => new OAuthCredentialsForm(input, hostingManagers, result)).Join();
             return result;
         }
     }
@@ -26,7 +26,7 @@ namespace CloudMerger.GuiPrimitives
     public class OAuthCredentialsForm : Form
     {
         private readonly OAuthCredentials input;
-        private readonly IService[] services;
+        private readonly IHostingManager[] hostingManagers;
         private readonly OAuthCredentials result;
 
         private ComboBox serviceSelector;
@@ -37,10 +37,10 @@ namespace CloudMerger.GuiPrimitives
         private Button reset;
         private Button cancel;
 
-        public OAuthCredentialsForm(OAuthCredentials input, IService[] services, OAuthCredentials result)
+        public OAuthCredentialsForm(OAuthCredentials input, IHostingManager[] hostingManagers, OAuthCredentials result)
         {
             this.input = input;
-            this.services = services;
+            this.hostingManagers = hostingManagers;
             this.result = result;
 
             InitializeControls();
@@ -55,19 +55,19 @@ namespace CloudMerger.GuiPrimitives
 
         private void End()
         {
-            result.Service = currentService?.Name?.ToLower();
+            result.Service = CurrentHostingManager?.Name?.ToLower();
             result.Login = login.Text == "" ? null : login.Text;
             result.Token = token.Text == "" ? null : token.Text;
             Close();
         }
 
-        private IService currentService => serviceSelector.SelectedItem as IService;
+        private IHostingManager CurrentHostingManager => serviceSelector.SelectedItem as IHostingManager;
 
         private async void Authorize()
         {
-            if (currentService == null)
+            if (CurrentHostingManager == null)
             {
-                MessageBox.Show("Please, select service", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please, select hostingManager", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -75,7 +75,7 @@ namespace CloudMerger.GuiPrimitives
                 Hide();
                 try
                 {
-                    var result = await currentService.AuthorizeAsync();
+                    var result = await CurrentHostingManager.AuthorizeAsync();
                     if (result != null)
                     {
                         login.Text = result.Login ?? "";
@@ -95,7 +95,7 @@ namespace CloudMerger.GuiPrimitives
 
         private void Reset()
         {
-            var srv = (object)services.FirstOrDefault(s => s.Name.ToLower() == input.Service?.ToLower()) ?? "?";
+            var srv = (object)hostingManagers.FirstOrDefault(s => s.Name.ToLower() == input.Service?.ToLower()) ?? "?";
             serviceSelector.SelectedIndex = serviceSelector.Items.IndexOf(srv);
             login.Text = input.Login ?? "";
             token.Text = input.Token ?? "";
@@ -111,7 +111,7 @@ namespace CloudMerger.GuiPrimitives
 
             serviceSelector = new ComboBox { Dock = DockStyle.Fill };
             serviceSelector.Items.Add("?");
-            serviceSelector.Items.AddRange(services);
+            serviceSelector.Items.AddRange(hostingManagers);
             serviceSelector.SelectedIndex = 0;
             serviceSelector.DropDownStyle = ComboBoxStyle.DropDownList;
             table.Controls.Add(serviceSelector, 0, 0);

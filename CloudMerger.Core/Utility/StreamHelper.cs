@@ -13,5 +13,13 @@ namespace CloudMerger.Core.Utility
                 yield return line;
             }
         }
+        public static IEnumerable<string> ReversedReadLines(this StreamReader reader)
+        {
+            string line = null;
+            while ((line = reader.ReadLine()) != null)
+            {
+                yield return line;
+            }
+        }
     }
 }

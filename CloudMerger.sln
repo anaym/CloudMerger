@@ -7,17 +7,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMerger.Core", "CloudMe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experements", "Experements\Experements.csproj", "{C01EC16C-5DD6-4D62-B994-0E11DF4F7461}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMerger.Application", "CloudMerger.Application\CloudMerger.Application.csproj", "{B9ABE1CB-6905-4955-B92A-912D97545792}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexFileHosting", "hostings\YandexFileHosting\YandexFileHosting.csproj", "{88CE6792-EFDB-485C-9316-4C759EA152C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hostings", "hostings", "{2D800F71-2A8E-49B9-8482-D0B5F5FF38AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexFileHosting.Test", "hostings\YandexFileHosting.Test\YandexFileHosting.Test.csproj", "{D7345FDD-DD72-49B5-A3A5-94BAE6170DDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMerger.CApplication", "CloudMerger.CApplication\CloudMerger.CApplication.csproj", "{66588B09-45D8-4C4B-BEDB-16818DC4867B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMerger.GuiPrimitives", "CloudMerger.GuiPrimitives\CloudMerger.GuiPrimitives.csproj", "{D694059E-9025-439F-90C3-FB59EAC84B17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMerger.HostingsManager", "CloudMerger.HostingsManager\CloudMerger.HostingsManager.csproj", "{B9ABE1CB-6905-4955-B92A-912D97545792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{2A6CAEE0-4918-4545-85C0-DD473C3A9277}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5922E118-0EB6-439A-BB8D-6CD1C96D8697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMerger.Core.Test", "CloudMerger.Core.Test\CloudMerger.Core.Test.csproj", "{D8EA541E-B5DE-4CDF-87D2-16447C9AA715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergedHosting", "hostings\MergedHosting\MergedHosting.csproj", "{4BBFDBFC-EB7E-4FE1-A589-C97BD802ABC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +39,6 @@ Global
 		{C01EC16C-5DD6-4D62-B994-0E11DF4F7461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C01EC16C-5DD6-4D62-B994-0E11DF4F7461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C01EC16C-5DD6-4D62-B994-0E11DF4F7461}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9ABE1CB-6905-4955-B92A-912D97545792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9ABE1CB-6905-4955-B92A-912D97545792}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9ABE1CB-6905-4955-B92A-912D97545792}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9ABE1CB-6905-4955-B92A-912D97545792}.Release|Any CPU.Build.0 = Release|Any CPU
 		{88CE6792-EFDB-485C-9316-4C759EA152C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{88CE6792-EFDB-485C-9316-4C759EA152C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88CE6792-EFDB-485C-9316-4C759EA152C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,14 +47,26 @@ Global
 		{D7345FDD-DD72-49B5-A3A5-94BAE6170DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7345FDD-DD72-49B5-A3A5-94BAE6170DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7345FDD-DD72-49B5-A3A5-94BAE6170DDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66588B09-45D8-4C4B-BEDB-16818DC4867B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66588B09-45D8-4C4B-BEDB-16818DC4867B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66588B09-45D8-4C4B-BEDB-16818DC4867B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66588B09-45D8-4C4B-BEDB-16818DC4867B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D694059E-9025-439F-90C3-FB59EAC84B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D694059E-9025-439F-90C3-FB59EAC84B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D694059E-9025-439F-90C3-FB59EAC84B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D694059E-9025-439F-90C3-FB59EAC84B17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9ABE1CB-6905-4955-B92A-912D97545792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9ABE1CB-6905-4955-B92A-912D97545792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9ABE1CB-6905-4955-B92A-912D97545792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9ABE1CB-6905-4955-B92A-912D97545792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A6CAEE0-4918-4545-85C0-DD473C3A9277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A6CAEE0-4918-4545-85C0-DD473C3A9277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A6CAEE0-4918-4545-85C0-DD473C3A9277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6CAEE0-4918-4545-85C0-DD473C3A9277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8EA541E-B5DE-4CDF-87D2-16447C9AA715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8EA541E-B5DE-4CDF-87D2-16447C9AA715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8EA541E-B5DE-4CDF-87D2-16447C9AA715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8EA541E-B5DE-4CDF-87D2-16447C9AA715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BBFDBFC-EB7E-4FE1-A589-C97BD802ABC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BBFDBFC-EB7E-4FE1-A589-C97BD802ABC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BBFDBFC-EB7E-4FE1-A589-C97BD802ABC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BBFDBFC-EB7E-4FE1-A589-C97BD802ABC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,5 +74,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{88CE6792-EFDB-485C-9316-4C759EA152C9} = {2D800F71-2A8E-49B9-8482-D0B5F5FF38AB}
 		{D7345FDD-DD72-49B5-A3A5-94BAE6170DDB} = {2D800F71-2A8E-49B9-8482-D0B5F5FF38AB}
+		{D8EA541E-B5DE-4CDF-87D2-16447C9AA715} = {5922E118-0EB6-439A-BB8D-6CD1C96D8697}
+		{4BBFDBFC-EB7E-4FE1-A589-C97BD802ABC6} = {2D800F71-2A8E-49B9-8482-D0B5F5FF38AB}
 	EndGlobalSection
 EndGlobal

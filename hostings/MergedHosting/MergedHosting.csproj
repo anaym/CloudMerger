@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{83233B96-0803-45D6-BE22-7A3B31534F60}</ProjectGuid>
+    <ProjectGuid>{4BBFDBFC-EB7E-4FE1-A589-C97BD802ABC6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CloudMerger.Core</RootNamespace>
-    <AssemblyName>CloudMerger.Core</AssemblyName>
+    <RootNamespace>MergedHosting</RootNamespace>
+    <AssemblyName>MergedHosting</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -29,11 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,23 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMultiHostingManager.cs" />
-    <Compile Include="Primitives\DiskSpaceInfo.cs" />
-    <Compile Include="Primitives\OAuthCredentials.cs" />
-    <Compile Include="Tree\Node.cs" />
-    <Compile Include="Tree\NodeFormatter.cs" />
-    <Compile Include="Utility\DirectoryHelper.cs" />
-    <Compile Include="Primitives\FileSize.cs" />
-    <Compile Include="Utility\FileHostingHelper.cs" />
-    <Compile Include="Utility\StreamHelper.cs" />
-    <Compile Include="Utility\TaskHelper.cs" />
-    <Compile Include="HostingException.cs" />
-    <Compile Include="IHosting.cs" />
-    <Compile Include="IHostingManager.cs" />
-    <Compile Include="Primitives\ItemInfo.cs" />
-    <Compile Include="Primitives\ItemType.cs" />
+    <Compile Include="MergedHosting.cs" />
+    <Compile Include="MergedHostingManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Primitives\UPath.cs" />
+    <Compile Include="TaskPool.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CloudMerger.Core\CloudMerger.Core.csproj">
+      <Project>{83233b96-0803-45d6-be22-7a3b31534f60}</Project>
+      <Name>CloudMerger.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
