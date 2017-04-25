@@ -72,18 +72,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="topology.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="topology.ini" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CloudMerger.Core\CloudMerger.Core.csproj">
       <Project>{83233b96-0803-45d6-be22-7a3b31534f60}</Project>
       <Name>CloudMerger.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CloudMerger.HostingsManager\CloudMerger.HostingsManager.csproj">
-      <Project>{b9abe1cb-6905-4955-b92a-912d97545792}</Project>
-      <Name>CloudMerger.HostingsManager</Name>
+    <ProjectReference Include="..\CloudMerger.GuiPrimitives\CloudMerger.GuiPrimitives.csproj">
+      <Project>{d694059e-9025-439f-90c3-fb59eac84b17}</Project>
+      <Name>CloudMerger.GuiPrimitives</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

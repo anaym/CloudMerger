@@ -8,7 +8,7 @@ namespace CloudMerger.Core.Tree
         public bool IsNode => !IsLeaf;
 
         public List<Node<T>> Nested { get; } = new List<Node<T>>();
-        public T Value { get; }
+        public T Value { get; set; }
 
         public Node(T value)
         {

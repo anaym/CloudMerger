@@ -13,6 +13,11 @@ namespace CloudMerger.Core.Tree
             return node;
         }
 
+        public static Node<T> Clone<T>(this Node<T> root)
+        {
+            return root.Select(v => v);
+        }
+
         public static IEnumerable<Node<T>> TopSort<T>(this Node<T> root)
         {
             var stack = new Stack<Node<T>> ();

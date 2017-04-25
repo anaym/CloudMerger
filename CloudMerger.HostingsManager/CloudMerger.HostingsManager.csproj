@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServicesCollection.cs" />
-    <Compile Include="Tree\CredentialsFormatter.cs" />
-    <Compile Include="Tree\HostingTreeBuilder.cs" />
+    <Compile Include="HostingsTreeBuilder\ServicesCollection.cs" />
+    <Compile Include="HostingsTreeBuilder\CredentialsFormatter.cs" />
+    <Compile Include="HostingsTreeBuilder\HostingTreeBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

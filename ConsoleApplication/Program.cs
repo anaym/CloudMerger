@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CloudMerger.Core;
 using CloudMerger.Core.Utility;
+using CloudMerger.GuiPrimitives;
 using CloudMerger.HostingsManager;
 using CloudMerger.HostingsManager.Tree;
 using Ninject;
@@ -36,10 +37,10 @@ namespace ConsoleApplication
                     .BindAllInterfaces();
             });
 
-            kernel.Bind<ServicesCollection>().ToSelf();
-            kernel.Bind<Application>().ToSelf();
-            kernel.Bind<HostingTreeBuilder>().ToSelf();
-            kernel.Bind<CredentialsFormatter>().ToSelf();
+            kernel.Bind<ServicesCollection>().ToSelf().InSingletonScope();
+            kernel.Bind<Application>().ToSelf().InSingletonScope();
+            kernel.Bind<HostingTreeBuilder>().ToSelf().InSingletonScope();
+            kernel.Bind<CredentialsFormatter>().ToSelf().InSingletonScope();
 
             kernel.Get<Application>().Run(args);
         }

@@ -25,6 +25,8 @@ namespace YandexFileHosting
         }
         public IHosting GetFileHostingFor(OAuthCredentials credentials)
         {
+            if (credentials.Token == null)
+                throw new HostingException("Incorrect token");
             if (credentials.Service.ToLower() != Name.ToLower())
                 throw new ArgumentException($"Credentials({credentials.Service}) is not valid for this hostingManager ({Name})");
 

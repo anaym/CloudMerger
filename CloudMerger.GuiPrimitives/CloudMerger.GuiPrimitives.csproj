@@ -53,9 +53,11 @@
     <Compile Include="ComboTextInput.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Mutable.cs" />
     <Compile Include="OAuthCredentialsEditor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaApplication.cs" />
+    <Compile Include="TopologyEditor.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

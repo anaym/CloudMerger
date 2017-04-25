@@ -32,11 +32,11 @@
   <ItemGroup>
     <Reference Include="Disk.SDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\yandex-disk-sdk-csharp\SDK\Disk.SDK.Provider (.NET 4.0)\bin\Debug\Disk.SDK.dll</HintPath>
+      <HintPath>sdk\Disk.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Disk.SDK.Provider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\yandex-disk-sdk-csharp\SDK\Disk.SDK.Provider (.NET 4.0)\bin\Debug\Disk.SDK.Provider.dll</HintPath>
+      <HintPath>sdk\Disk.SDK.Provider.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

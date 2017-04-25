@@ -44,6 +44,9 @@
   <ItemGroup>
     <Compile Include="IMultiHostingManager.cs" />
     <Compile Include="Primitives\DiskSpaceInfo.cs" />
+    <Compile Include="Primitives\HostingsTreeBuilder\CredentialsFormatter.cs" />
+    <Compile Include="Primitives\HostingsTreeBuilder\HostingTreeBuilder.cs" />
+    <Compile Include="Primitives\HostingsTreeBuilder\ServicesCollection.cs" />
     <Compile Include="Primitives\OAuthCredentials.cs" />
     <Compile Include="Tree\Node.cs" />
     <Compile Include="Tree\NodeFormatter.cs" />
