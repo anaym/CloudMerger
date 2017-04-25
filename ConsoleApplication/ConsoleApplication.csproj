@@ -88,11 +88,17 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="copyHostings.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="hostings\Disk.SDK.dll" />
     <Content Include="hostings\Disk.SDK.Provider.dll" />
     <Content Include="hostings\YandexFileHosting.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>python copyHostings.py</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
