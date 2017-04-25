@@ -47,6 +47,7 @@
     <Compile Include="Primitives\OAuthCredentials.cs" />
     <Compile Include="Tree\Node.cs" />
     <Compile Include="Tree\NodeFormatter.cs" />
+    <Compile Include="Tree\TreeHelpers.cs" />
     <Compile Include="Utility\DirectoryHelper.cs" />
     <Compile Include="Primitives\FileSize.cs" />
     <Compile Include="Utility\FileHostingHelper.cs" />

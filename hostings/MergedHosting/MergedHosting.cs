@@ -49,7 +49,7 @@ namespace MergedHosting
             var file = taskPool.Completed.Where(t => t.Result.IsFile).ToList();
 
             if (dir.Count == 0 && file.Count == 0 && notFounded.Count == 0)
-                throw new HostUnavailable("All hostings unavailable");
+                throw new ItemNotFound("All hostings unavailable :(");
             else if (dir.Count == 0 && file.Count == 0 && notFounded.Count > 0)
                 throw new ItemNotFound();
             else if (dir.Count > 0 && file.Count == 0)
@@ -152,7 +152,7 @@ namespace MergedHosting
             {
                 var completed = await Task.WhenAny(tasks);
                 var hosting = workedHostings[tasks.IndexOf(completed)];
-                if (completed.Result)
+                if (!completed.IsFaulted && completed.Result)
                 {
                     if (withFile != null)
                         throw new HostingException("More one hosting contains file!");

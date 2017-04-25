@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace CloudMerger.Core.Tree
 {
@@ -15,13 +13,6 @@ namespace CloudMerger.Core.Tree
         public Node(T value)
         {
             Value = value;
-        }
-
-        public Node<TR> Select<TR>(Func<T, TR> selector)
-        {
-            var node = new Node<TR>(selector(Value));
-            node.Nested.AddRange(Nested.Select(n => n.Select(selector)));
-            return node;
         }
 
         public override string ToString() => $"{Value}";

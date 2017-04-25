@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
-using CommandLine;
+using System.Threading.Tasks;
 
 namespace ConsoleApplication
 {
-    public abstract class ConsoleApplication<T>
+    public abstract class ConsoleApplication
     {
-        static ConsoleApplication()
+        protected ConsoleApplication()
         {
-            commands = typeof(T)
+            commands = this.GetType()
                 .GetMethods()
                 .Where(m => m.CustomAttributes.Any(d => d.AttributeType == typeof(CommandAttribute)))
-                .Where(m => m.GetParameters().Length == 0 || m.GetParameters().All(p => p.ParameterType == typeof(string)))
-                .ToDictionary(m => m.Name.ToLower(), m => new Command(m.GetParameters().Length, (t, args) => m.Invoke(t, args)));
+                .Where(
+                    m => m.GetParameters().Length == 0 || m.GetParameters().All(p => p.ParameterType == typeof(string)))
+                .ToDictionary(m => m.Name.ToLower(), m => Command.FromMethodInfo(m, this));
         }
 
         protected void Execute(string command)
@@ -28,9 +30,10 @@ namespace ConsoleApplication
                 throw new InvalidOperationException($"Unexpected command `{cmd}` with args {argStr}");
 
             var executor = commands[cmd];
-            if (executor.ArgumentsCount != args.Length)
-                throw new ArgumentException($"Invalid arguments count: expected {executor.ArgumentsCount}, but: {argStr}");
-            executor.Executor(this, args);
+            if (executor.Arguments.Length != args.Length)
+                throw new ArgumentException(
+                    $"Invalid arguments count: expected {executor.Arguments.Length}, but: {argStr}");
+            executor.Executor(args);
         }
 
         protected void ShowHelp()
@@ -38,7 +41,7 @@ namespace ConsoleApplication
             Console.WriteLine("Available commands: ");
             foreach (var command in commands)
             {
-                Console.WriteLine($"\t{command.Key}");
+                Console.WriteLine($"\t{command.Key}({string.Join(", ", command.Value.Arguments)})");
             }
         }
 
@@ -58,18 +61,44 @@ namespace ConsoleApplication
             return args.ToArray();
         }
 
-        private readonly Regex commandRe = new Regex(@"^(?<command>\S+?)((\s""(?<arg>[^""]+?)"")|(\s(?<arg>\S+?)))*\s?$");
-        private static readonly IReadOnlyDictionary<string, Command> commands;
+        private readonly Regex commandRe =
+            new Regex(@"^(?<command>\S+?)((\s+""(?<arg>[^""]*?)"")|(\s+(?<arg>\S+?)))*\s*$");
+
+        private readonly IReadOnlyDictionary<string, Command> commands;
 
         private class Command
         {
-            public readonly Action<object, string[]> Executor;
-            public readonly int ArgumentsCount;
+            public readonly string[] Arguments;
+            public readonly Action<string[]> Executor;
 
-            public Command(int argumentsCount, Action<object, string[]> executor)
+            public static Command FromMethodInfo(MethodInfo info, object self)
             {
-                ArgumentsCount = argumentsCount;
+                return new Command(info.GetParameters().Select(p => p.Name), ExtractFunc(info, self));
+            }
+
+            public Command(IEnumerable<string> arguments, Action<string[]> executor)
+            {
+                this.Arguments = arguments.ToArray();
                 Executor = executor;
+            }
+
+            private static Action<string[]> ExtractFunc(MethodInfo info, object self)
+            {
+                if (typeof(Task).IsAssignableFrom(info.ReturnType))
+                    return args =>
+                    {
+                        try
+                        {
+                            ((Task) info.Invoke(self, args)).Wait();
+                        }
+                        catch (AggregateException ex)
+                        {
+                            if (ex.InnerException != null)
+                                throw ex.InnerException;
+                            throw ex.InnerExceptions.First();
+                        }
+                    };
+                return args => info.Invoke(self, args);
             }
         }
     }

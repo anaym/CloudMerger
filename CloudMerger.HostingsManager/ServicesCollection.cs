@@ -5,28 +5,8 @@ using CloudMerger.Core;
 
 namespace CloudMerger.HostingsManager
 {
-    //TODO: maybe replace to DI?
     public class ServicesCollection
     {
-        //public static ServicesCollection LoadServices(DirectoryInfo directory)
-        //{
-        //    var managers = new 
-        //    foreach (var dll in directory.GetFiles("*.dll").Select(f => f.FullName).Select(Assembly.LoadFrom))
-        //    {
-        //        var types = dll.GetExportedTypes()
-        //            .Where(t => typeof(IHostingManager).IsAssignableFrom(t))
-        //            .Where(t => !t.IsAbstract)
-        //            .Where(t => !t.IsInterface)
-        //            .Where(t => t.IsPublic)
-        //            .ToArray();
-        //        var constructors = types.Select(t => t.GetConstructor(new Type[0])).Where(c => c != null);
-        //        var instances = constructors.Select(c => c.Invoke(new object[0])).Cast<IHostingManager>();
-        //        foreach (var instance in instances)
-        //            collection.Add(instance);
-        //    }
-        //    return collection;
-        //}
-
         public ServicesCollection(IHostingManager[] managers, IMultiHostingManager[] multiHostingManagers)
         {
             try
@@ -42,6 +22,9 @@ namespace CloudMerger.HostingsManager
                 throw new InvalidOperationException("Not unique key", ex);
             }
         }
+
+        public IEnumerable<string> Managers => managers.Keys;
+        public IEnumerable<string> MultiHostingManagers => multiHostingManagers.Keys;
 
         public bool IsContainsManager(string name) => managers.ContainsKey(name.ToLower());
         public bool IsContainsMultiHostingManager(string name) => multiHostingManagers.ContainsKey(name.ToLower());

@@ -13,22 +13,19 @@ namespace CloudMerger.HostingsManager.Tree
             formatter = new NodeFormatter(' ');
         }
 
-        public void BuildNodes(Node<OAuthCredentials> node, StreamWriter writer)
+        public void BuildNodes(Node<OAuthCredentials> root, StreamWriter writer)
         {
-            formatter.BuildNodes(node.Select(c => c.SerializeToString()), writer);
+            formatter.BuildNodes(root.Select(c => c.SerializeToString()), writer);
         }
 
         public Node<OAuthCredentials> ParseNodes(StreamReader reader)
         {
             return formatter.ParseNodes(reader).Select(OAuthCredentials.FromString);
         }
-    }
 
-    public class FileHostingLoader
-    {
-        public FileHostingLoader()
+        public Node<OAuthCredentials> ParseNodes(string text)
         {
-            
+            return formatter.ParseNodes(text).Select(OAuthCredentials.FromString);
         }
     }
 }

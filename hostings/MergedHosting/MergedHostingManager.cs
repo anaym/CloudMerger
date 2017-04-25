@@ -9,7 +9,7 @@ namespace MergedHosting
 
         public IHosting GetFileHostingFor(IHosting[] hostings)
         {
-            return new MergedHosting(hostings, TimeSpan.FromSeconds(10));
+            return new MergedHosting(hostings, TimeSpan.FromSeconds(60));
         }
     }
 }

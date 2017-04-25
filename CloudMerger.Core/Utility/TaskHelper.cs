@@ -32,9 +32,9 @@ namespace CloudMerger.Core.Utility
 
         public static bool IsFaultedWith<T>(this Task task) where T : Exception
         {
-            if (task.IsFaulted)
+            if (!task.IsFaulted)
                 return false;
-            return task.Exception.InnerExceptions.First().GetType() == typeof(T);
+            return task.Exception?.InnerExceptions.First().GetType() == typeof(T);
         }
 
         public static async Task<T> ReplaceResult<T>(this Task task, T value = default(T))

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CloudMerger.Application.Topology;
 using CloudMerger.Core;
 using CloudMerger.Core.Primitives;
 using CloudMerger.GuiPrimitives;

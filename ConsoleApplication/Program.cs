@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using CloudMerger.Core;
 using CloudMerger.Core.Utility;
 using CloudMerger.HostingsManager;
+using CloudMerger.HostingsManager.Tree;
 using Ninject;
 using Ninject.Extensions.Conventions;
+using Ninject.Extensions.Factory;
 
 namespace ConsoleApplication
 {
@@ -36,8 +38,9 @@ namespace ConsoleApplication
 
             kernel.Bind<ServicesCollection>().ToSelf();
             kernel.Bind<Application>().ToSelf();
+            kernel.Bind<HostingTreeBuilder>().ToSelf();
+            kernel.Bind<CredentialsFormatter>().ToSelf();
 
-            var s = kernel.Get<ServicesCollection>();
             kernel.Get<Application>().Run(args);
         }
     }
