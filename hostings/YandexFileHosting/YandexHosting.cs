@@ -155,39 +155,14 @@ namespace YandexFileHosting
             }
         }
 
-        public async Task MoveFileAsync(UPath source, UPath destination)
+        public async Task RenameAsync(UPath path, string newName)
         {
-            await client.MoveAsync(source.UnixFormat(), destination.UnixFormat());
-        }
-
-        public async Task CopyFileAsync(UPath source, UPath destination)
-        {
-            try
-            {
-                var dinfo = await GetItemInfoAsync(destination);
-                if (dinfo.IsDirectory)
-                    throw new UnexpectedItemType("Destination should be file oe unexisted path");
-            }
-            catch (ItemNotFound)
-            { }
-
-            try
-            {
-                var sinfo = await GetItemInfoAsync(source);
-                if (sinfo.IsDirectory)
-                    throw new UnexpectedItemType("Source should be file");
-                if (!await IsExistAsync(destination.Parent))
-                    throw new ItemNotFound("Parent for destination unexist");
-                await client.CopyAsync(source.UnixFormat(), destination.UnixFormat());
-            }
-            catch (ItemNotFound)
-            {
-                throw; //explicit
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dest = path.Parent.SubPath(newName);
+            if (await IsExistAsync(dest))
+                throw new InvalidOperationException("Destination already exist");
+            if (!await  IsExistAsync(path))
+                throw new ItemNotFound("Source is not founded");
+            await client.MoveAsync(path.UnixFormat(), dest.UnixFormat());
         }
 
         public async Task UploadFileAsync(Stream stream, UPath path, IProgress<double> progress)

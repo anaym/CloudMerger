@@ -41,22 +41,11 @@ namespace CloudMerger.Core
         /// <exception cref="InconsistentFileSystemState"></exception>
         Task RemoveDirectoryAsync(UPath path, bool recursive);
 
-        /// <exception cref="UnexpectedItemType">Expected path to file or unexisted path, but recieved path to directory</exception>
-        /// <exception cref="UnexpectedItemType">Destination should be path unexisted path or path to file, but recieved path to directory</exception>
         /// <exception cref="ItemNotFound">Not founded path to source</exception>
-        /// <exception cref="ItemNotFound">Not founded parent directory for destination</exception>
+        /// <exception cref="InvalidOperationException">Incorrect name</exception>
         /// <exception cref="HostUnavailable">Token incorrect, or can`t resolve hostname</exception>
         /// <exception cref="InconsistentFileSystemState"></exception>
-        /// <exception cref="OutOfSpaceLimit"></exception>
-        Task MoveFileAsync(UPath source, UPath destination);
-        /// <exception cref="UnexpectedItemType">Expected path to file, but recieved path to directory</exception>
-        /// <exception cref="UnexpectedItemType">Destination should be unexisted path or path to file, but recieved path to directory</exception>
-        /// <exception cref="ItemNotFound">Not founded path to source</exception>
-        /// <exception cref="ItemNotFound">Not founded parent directory for destination</exception>
-        /// <exception cref="HostUnavailable">Token incorrect, or can`t resolve hostname</exception>
-        /// <exception cref="InconsistentFileSystemState"></exception>
-        /// <exception cref="OutOfSpaceLimit"></exception>
-        Task CopyFileAsync(UPath source, UPath destination);
+        Task RenameAsync(UPath path, string newName);
 
         /// <exception cref="UnexpectedItemType">Expected path to file or unexisted path, but recieved path to directory</exception>
         /// <exception cref="ItemNotFound">Not founded parent directory</exception>

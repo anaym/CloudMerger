@@ -31,8 +31,15 @@ namespace MergedHosting
 
         public async Task<bool> IsExistAsync(UPath path)
         {
-            throw new NotImplementedException();
-
+            try
+            {
+                await GetItemInfoAsync(path);
+                return true;
+            }
+            catch (ItemNotFound)
+            {
+                return false;
+            }
         }
 
         public async Task<ItemInfo> GetItemInfoAsync(UPath path)
@@ -75,8 +82,7 @@ namespace MergedHosting
             var directories = new Dictionary<string, ItemInfo>();
             var files = new Dictionary<string, ItemInfo>();
             var contents = await Task.WhenAll(withDir.Select(h => h.GetDirectoryListAsync(path)));
-            foreach (var content in contents)
-                foreach (var item in content)
+            foreach (var item in contents.SelectMany(c => c))
                     if (item.IsFile)
                     {
                         if (files.ContainsKey(item.Name))
@@ -96,28 +102,42 @@ namespace MergedHosting
 
         public async Task MakeDirectoryAsync(UPath path)
         {
-            throw new NotImplementedException();
+            if (!await this.IsDirectoryOrUnexistAsync(path))
+                throw new UnexpectedItemType("Expected directory");
+            await Task.WhenAll(hostings.Select(h => h.MakeDirectoryAsync(path)));
         }
 
         public async Task RemoveFileAsync(UPath path)
         {
-            throw new NotImplementedException();
+            if (!await this.IsFileOrUnexistAsync(path))
+                throw new UnexpectedItemType("Expected file");
+            await Task.WhenAll(hostings.Select(h => h.RemoveFileAsync(path)));
         }
 
         public async Task RemoveDirectoryAsync(UPath path, bool recursive)
         {
-            throw new NotImplementedException();
+            if (!await IsExistAsync(path))
+                return;
+            if (await this.IsFileAsync(path))
+                throw new UnexpectedItemType("Expected directory");
+            if (!recursive && (await GetDirectoryListAsync(path)).Any())
+                throw new InvalidOperationException("Directory is not empty and recursive disabled'");
+            await Task.WhenAll(hostings.Select(h => h.RemoveDirectoryAsync(path, recursive)));
         }
 
-        public async Task MoveFileAsync(UPath source, UPath destination)
+        public async Task RenameAsync(UPath path, string newName)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task CopyFileAsync(UPath source, UPath destination)
-        {
-            if (!await this.IsFileAsync(source))
-                throw new UnexpectedItemType(source);
+            var dest = path.Parent.SubPath(newName);
+            if (!await IsExistAsync(path))
+                throw new ItemNotFound("Source is not founded");
+            if (await IsExistAsync(dest))
+                throw new InvalidOperationException("Destiantion already exist");
+            await Task.WhenAny(hostings.Select(async h =>
+            {
+                if (!await IsExistAsync(path))
+                    return;
+                await h.RenameAsync(path, newName);
+            }));
         }
 
         public async Task UploadFileAsync(Stream stream, UPath path, IProgress<double> progressProvider = null)
@@ -131,9 +151,15 @@ namespace MergedHosting
             }
             catch (ItemNotFound)
             {
-                //find host with more space
-                //upload
-                throw new NotImplementedException();
+                if (!await IsExistAsync(path.Parent))
+                    throw new ItemNotFound("Parent not founded");
+
+                var sizes = (await Task.WhenAll(hostings.Select(h => h.GetSpaceInfoAsync())))
+                    .Select(h => h.FreeSpace).ToList();
+
+                var host = hostings[sizes.IndexOf(sizes.Max())];
+                await host.MakeDirectoryAsync(path.Parent); //if directory don`t exist only on this host
+                await host.UploadFileAsync(stream, path, progressProvider);
             }
         }
 
@@ -197,11 +223,6 @@ namespace MergedHosting
                 tasks.Remove(completed);
             }
             return withDir;
-        }
-
-        private Task SolveCollision(IReadOnlyList<ItemInfo> files, IReadOnlyList<ItemInfo> dir)
-        {
-            throw new NotImplementedException();
         }
 
         private readonly IHosting[] hostings;

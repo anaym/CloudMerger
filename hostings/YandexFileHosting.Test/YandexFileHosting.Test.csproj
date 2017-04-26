@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CopyFileRequest_Should.cs" />
     <Compile Include="DirectoryListRequest_Should.cs" />
     <Compile Include="GetInfo_Should.cs" />
     <Compile Include="HostingTestBase.cs" />

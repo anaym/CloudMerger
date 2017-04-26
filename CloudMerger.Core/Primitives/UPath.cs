@@ -31,6 +31,11 @@ namespace CloudMerger.Core.Primitives
         public string Name { get; }
         public UPath Parent => new UPath(path.Substring(0, path.LastIndexOf(Separator)));
 
+        public UPath SubPath(string name)
+        {
+            return new UPath($"{UnixFormat()}/{name}");
+        }
+
         public string UnixFormat() => Format('/');
         public string WindowsFormat(string drive) => Format($"{drive}:\\", '\\');
         public string Format(string begin, char separator)
