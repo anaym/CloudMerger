@@ -20,7 +20,8 @@ namespace CloudMerger.Core.Utility
 
         public static async Task<bool> IsDirectoryAsync(this IHosting hosting, UPath path)
         {
-            return (await hosting.GetItemInfoAsync(path)).IsDirectory;
+            var info = (await hosting.GetItemInfoAsync(path));
+            return info.IsDirectory;
         }
 
         public static async Task<bool> IsFileAsync(this IHosting hosting, UPath path)

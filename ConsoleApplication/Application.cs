@@ -69,7 +69,14 @@ namespace ConsoleApplication
             var i = 0;
             foreach (var item in await hosting.GetDirectoryListAsync(path))
             {
-                Console.WriteLine($"{i,3} {(item.IsFile ? 'F' : 'D')} '{item.Name}' {item.Size} {item.LastWriteTime}");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"{i,3} {(item.IsFile ? 'F' : 'D')}");
+                Console.ForegroundColor = item.IsFile ? ConsoleColor.Cyan : ConsoleColor.Yellow;
+                Console.Write($" '{item.Name}' \t");
+                Console.ForegroundColor = ConsoleColor.Green;
+                if (item.IsFile)
+                    Console.Write($"[{item.Size}] {item.LastWriteTime}");
+                Console.WriteLine();
                 i++;
             }
         }

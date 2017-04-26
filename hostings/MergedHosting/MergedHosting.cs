@@ -9,10 +9,7 @@ using CloudMerger.Core.Utility;
 
 namespace MergedHosting
 {
-    //TODO: solve file overlaps:
-    //  host A: file.jpg, 12.12.2011
-    //  host B: file.jpg, 13.13.2012
-    //      remove file.jpg on host A (LWW)
+    //TODO: Что делать, если директория существует на хостах A и B, но я хочу залить в нее файл на хост С?
     internal class MergedHosting : IHosting
     {
         public const string ServiceName = "Merged Hosing";
@@ -48,6 +45,10 @@ namespace MergedHosting
             var dir = taskPool.Completed.Where(t => t.Result.IsDirectory).ToList();
             var file = taskPool.Completed.Where(t => t.Result.IsFile).ToList();
 
+            var withIFSS = taskPool.Faulted.FirstOrDefault(t => t.IsFaultedWith<InconsistentFileSystemState>());
+            if (withIFSS != null)
+                throw new InconsistentFileSystemState("Inconsistent any hosting", withIFSS.Exception?.InnerException);
+
             if (file.Count == 1 && dir.Count == 0)
                 return file[0].Result;
             if (file.Count == 0 && dir.Count > 0)
@@ -71,8 +72,26 @@ namespace MergedHosting
             var withDir = await GetHostingsWithDirectory(path);
             if (withDir.Count == 0)
                 throw new ItemNotFound();
-            //TODO: сливать директории и падать если файлы есть на разных хостингах
-            return (await Task.WhenAll(withDir.Select(h => h.GetDirectoryListAsync(path)))).SelectMany(l => l);
+            var directories = new Dictionary<string, ItemInfo>();
+            var files = new Dictionary<string, ItemInfo>();
+            var contents = await Task.WhenAll(withDir.Select(h => h.GetDirectoryListAsync(path)));
+            foreach (var content in contents)
+                foreach (var item in content)
+                    if (item.IsFile)
+                    {
+                        if (files.ContainsKey(item.Name))
+                            throw new InconsistentFileSystemState($"More than one hosting contains file '{item.Name}'");
+                        if (directories.ContainsKey(item.Name))
+                            throw new InconsistentFileSystemState($"{item.Name} is file or directory?");
+                        files[item.Name] = item;
+                    }
+                    else
+                    {
+                        if (files.ContainsKey(item.Name))
+                            throw new InconsistentFileSystemState($"{item.Name} is file or directory?");
+                        directories[item.Name] = item;
+                    }
+            return directories.Values.Union(files.Values);
         }
 
         public async Task MakeDirectoryAsync(UPath path)
@@ -159,17 +178,20 @@ namespace MergedHosting
         private async Task<List<IHosting>> GetHostingsWithDirectory(UPath path)
         {
             var withDir = new List<IHosting>();
-            var workedHostings = withDir.ToList();
-            var tasks = withDir.Select(h => h.IsDirectoryAsync(path).WithTimeOut(Timeout)).ToList();
+            var workedHostings = hostings.ToList();
+            var tasks = hostings.Select(h => h.IsDirectoryAsync(path).WithTimeOut(Timeout)).ToList();
             while (tasks.Count > 0)
             {
                 var completed = await Task.WhenAny(tasks);
                 var hosting = workedHostings[tasks.IndexOf(completed)];
                 if (completed.IsFaultedWith<InconsistentFileSystemState>())
                     throw new InconsistentFileSystemState(completed.Exception?.InnerException);
-                if (!completed.IsFaulted && completed.Result)
+                if (!completed.IsFaulted)
                 {
-                    withDir.Add(hosting);
+                    if (completed.Result)
+                        withDir.Add(hosting);
+                    else
+                        throw new UnexpectedItemType("Expected path to directory");
                 }
                 workedHostings.Remove(hosting);
                 tasks.Remove(completed);
