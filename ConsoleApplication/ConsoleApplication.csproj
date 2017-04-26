@@ -67,6 +67,7 @@
     <Compile Include="CommandAttribute.cs" />
     <Compile Include="ConsoleApplication.cs" />
     <Compile Include="ConsoleProgressProvider.cs" />
+    <Compile Include="ConsoleTableVisualizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

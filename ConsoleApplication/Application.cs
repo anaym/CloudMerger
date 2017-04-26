@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using CloudMerger.Core;
@@ -27,6 +28,8 @@ namespace ConsoleApplication
                 if (topology != null)
                     hosting = treeBuilder.FromCredentials(topology);    
             }
+
+            dirListVisuzlizer = new ConsoleTableVisualizer(new []{ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Yellow}, new []{-1, 10, 10}, 0);
         }
 
         public void Run(string[] args)
@@ -66,19 +69,8 @@ namespace ConsoleApplication
         [Command]
         public async Task List(string path)
         {
-            var i = 0;
-            foreach (var item in await hosting.GetDirectoryListAsync(path))
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"{i,3} {(item.IsFile ? 'F' : 'D')}");
-                Console.ForegroundColor = item.IsFile ? ConsoleColor.Cyan : ConsoleColor.Yellow;
-                Console.Write($" '{item.Name}' \t");
-                Console.ForegroundColor = ConsoleColor.Green;
-                if (item.IsFile)
-                    Console.Write($"[{item.Size}] {item.LastWriteTime}");
-                Console.WriteLine();
-                i++;
-            }
+            var items = await hosting.GetDirectoryListAsync(path);
+            dirListVisuzlizer.PagedShow(items.Select(i => new [] {i.Name, i.LastWriteTime.ToString(), i.IsDirectory ? "" : i.Size.ToString()}));
         }
 
         [Command]
@@ -140,5 +132,6 @@ namespace ConsoleApplication
         private readonly HostingTreeBuilder treeBuilder;
         private readonly CredentialsFormatter formatter;
         private Exception lastError = null;
+        private readonly ConsoleTableVisualizer dirListVisuzlizer;
     }
 }
