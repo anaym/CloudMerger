@@ -63,11 +63,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="CommandAttribute.cs" />
-    <Compile Include="ConsoleApplication.cs" />
-    <Compile Include="ConsoleProgressProvider.cs" />
-    <Compile Include="ConsoleTableVisualizer.cs" />
+    <Compile Include="Infrastructure\CommandsHelper.cs" />
+    <Compile Include="Infrastructure\ColoredConsole.cs" />
+    <Compile Include="TopologyConfigurator.cs" />
+    <Compile Include="FileHostingClient.cs" />
+    <Compile Include="IHostingProvider.cs" />
+    <Compile Include="Infrastructure\Command.cs" />
+    <Compile Include="Infrastructure\CommandAttribute.cs" />
+    <Compile Include="Infrastructure\ConsoleApplication.cs" />
+    <Compile Include="Infrastructure\ConsoleProgressProvider.cs" />
+    <Compile Include="Infrastructure\ConsoleTableVisualizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,9 +96,6 @@
     <Content Include="copyHostings.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="hostings\Disk.SDK.dll" />
-    <Content Include="hostings\Disk.SDK.Provider.dll" />
-    <Content Include="hostings\YandexFileHosting.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -38,11 +38,15 @@ namespace ConsoleApplication
             });
 
             kernel.Bind<ServicesCollection>().ToSelf().InSingletonScope();
-            kernel.Bind<Application>().ToSelf().InSingletonScope();
+            kernel.Bind<TopologyConfigurator>().ToSelf().InSingletonScope();
+            kernel.Bind<IHostingProvider>().ToMethod(c => c.Kernel.Get<TopologyConfigurator>()).InSingletonScope();
             kernel.Bind<HostingTreeBuilder>().ToSelf().InSingletonScope();
             kernel.Bind<CredentialsFormatter>().ToSelf().InSingletonScope();
+            kernel.Bind<FileHostingClient>().ToSelf().InSingletonScope();
 
-            kernel.Get<Application>().Run(args);
+            var configurator = kernel.Get<TopologyConfigurator>();
+            var client = kernel.Get<FileHostingClient>();
+            new ConsoleApplication(configurator.ExtractCommands(), client.ExtractCommands()).Run();
         }
     }
 }

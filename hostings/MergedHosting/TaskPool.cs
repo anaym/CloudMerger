@@ -10,7 +10,7 @@ namespace MergedHosting
     {
         public TaskPool(params Task<T>[] tasks)
         {
-            worked = tasks.Where(t => !t.IsCompleted && !t.IsFaulted && !t.IsCanceled).ToList();
+            worked = tasks.ToList();
 
             completed = new List<Task<T>>();
             faulted = new List<Task<T>>();

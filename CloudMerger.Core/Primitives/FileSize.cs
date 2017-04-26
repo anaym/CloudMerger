@@ -35,6 +35,16 @@ namespace CloudMerger.Core.Primitives
 
         public static FileSize operator +(FileSize left, FileSize right) => new FileSize(left.TotalBytes + right.TotalBytes);
 
+        public string ToShortString()
+        {
+            for (int i = multipliers.Length - 1; i >= 0; i--)
+            {
+                if (GetCount(i) > 0)
+                    return $"{GetTotalCount(i):00.000}{suffixes[i]}";
+            }
+            return "0B";
+        }
+
         public override string ToString()
         {
             var str = new StringBuilder();
