@@ -10,14 +10,14 @@ namespace CloudMerger.GuiPrimitives
 {
     public static class OAuthCredentialsEditor
     {
-        public static Task<OAuthCredentials> ShowNew(IHostingManager[] hostingManagers)
+        public static Task<Result<OAuthCredentials>> ShowNew(IHostingManager[] hostingManagers)
         {
             return ShowNew(new OAuthCredentials(), hostingManagers);
         }
 
-        public static async Task<OAuthCredentials> ShowNew(OAuthCredentials input, IHostingManager[] hostingManagers)
+        public static async Task<Result<OAuthCredentials>> ShowNew(OAuthCredentials input, IHostingManager[] hostingManagers)
         {
-            var result = new OAuthCredentials();
+            var result = new Result<OAuthCredentials>(new OAuthCredentials());
             StaApplication.StartNew(() => new OAuthCredentialsForm(input, hostingManagers, result)).Join();
             return result;
         }
@@ -27,7 +27,7 @@ namespace CloudMerger.GuiPrimitives
     {
         private readonly OAuthCredentials input;
         private readonly IHostingManager[] hostingManagers;
-        private readonly OAuthCredentials result;
+        private readonly Result<OAuthCredentials> result;
 
         private ComboBox serviceSelector;
         private ComboTextInput login;
@@ -37,7 +37,7 @@ namespace CloudMerger.GuiPrimitives
         private Button reset;
         private Button cancel;
 
-        public OAuthCredentialsForm(OAuthCredentials input, IHostingManager[] hostingManagers, OAuthCredentials result)
+        public OAuthCredentialsForm(OAuthCredentials input, IHostingManager[] hostingManagers, Result<OAuthCredentials> result)
         {
             this.input = input;
             this.hostingManagers = hostingManagers;
@@ -49,15 +49,22 @@ namespace CloudMerger.GuiPrimitives
             token.ButtonClick += _ => Authorize();
 
             reset.Click += (_, __) => Reset();
-            cancel.Click += (_, __) => { Reset(); End(); };
+            cancel.Click += (_, __) => Cancel();
             ok.Click += (_, __) => End();
+        }
+
+        private void Cancel()
+        {
+            Reset();
+            result.HasBeenCanceled = true;
+            End();
         }
 
         private void End()
         {
-            result.Service = CurrentHostingManager?.Name?.ToLower();
-            result.Login = login.Text == "" ? null : login.Text;
-            result.Token = token.Text == "" ? null : token.Text;
+            result.Value.Service = CurrentHostingManager?.Name?.ToLower();
+            result.Value.Login = login.Text == "" ? null : login.Text;
+            result.Value.Token = token.Text == "" ? null : token.Text;
             Close();
         }
 

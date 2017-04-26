@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CloudMerger.Core.Primitives
 { 
@@ -27,6 +28,11 @@ namespace CloudMerger.Core.Primitives
             Size = size;
             LastWriteTime = lastWriteTime;
             Hostings = hostings;
+        }
+
+        public ItemInfo OnHostings(IEnumerable<IHosting> hostings)
+        {
+            return new ItemInfo(Path, Type, Size, LastWriteTime, hostings.ToArray());
         }
     }
 }

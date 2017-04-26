@@ -12,16 +12,16 @@ namespace CloudMerger.GuiPrimitives
 {
     public class TopologyEditor
     {
-        public static Task<Node<OAuthCredentials>> ShowNew(ServicesCollection services)
+        public static Task<Result<Node<OAuthCredentials>>> ShowNew(ServicesCollection services)
         {
             return ShowNew(null, services);
         }
 
-        public static async Task<Node<OAuthCredentials>> ShowNew(Node<OAuthCredentials> input, ServicesCollection services)
+        public static async Task<Result<Node<OAuthCredentials>>> ShowNew(Node<OAuthCredentials> input, ServicesCollection services)
         {
-            var result = new Mutable<Node<OAuthCredentials>>(null);
+            var result = new Result<Node<OAuthCredentials>>(null);
             StaApplication.StartNew(() => new TopologyEditorForm(services, input, result)).Join();
-            return result.Value;
+            return result;
         }
     }
 
@@ -29,9 +29,9 @@ namespace CloudMerger.GuiPrimitives
     {
         private readonly ServicesCollection services;
         private readonly Node<OAuthCredentials> input;
-        private readonly Mutable<Node<OAuthCredentials>> result;
+        private readonly Result<Node<OAuthCredentials>> result;
 
-        public TopologyEditorForm(ServicesCollection services, Node<OAuthCredentials> input, Mutable<Node<OAuthCredentials>> result)
+        public TopologyEditorForm(ServicesCollection services, Node<OAuthCredentials> input, Result<Node<OAuthCredentials>> result)
         {
             this.services = services;
             this.input = input;
@@ -63,6 +63,7 @@ namespace CloudMerger.GuiPrimitives
 
         private void Cancel()
         {
+            result.HasBeenCanceled = true;
             Reset();
             Save();
         }
@@ -74,6 +75,8 @@ namespace CloudMerger.GuiPrimitives
             if (curent == null)
             {
                 var credentials = await OAuthCredentialsEditor.ShowNew(services.Managers.ToArray());
+                if (credentials.HasBeenCanceled)
+                    return;
                 result.Value = new Node<OAuthCredentials>(credentials);
                 Update();
             }
@@ -82,6 +85,8 @@ namespace CloudMerger.GuiPrimitives
                 if (services.IsContainsMultiHostingManager(node.Value.Service))
                 {
                     var credentials = await OAuthCredentialsEditor.ShowNew(services.Managers.ToArray());
+                    if (credentials.HasBeenCanceled)
+                        return;
                     var n = new Node<OAuthCredentials>(credentials);
                     node.Nested.Add(n);
                     var tn = new TreeNode {Tag = n};
@@ -142,6 +147,8 @@ namespace CloudMerger.GuiPrimitives
             if (current.Value.Service == null || services.IsContainsManager(current.Value.Service))
             {
                 var credentials = await OAuthCredentialsEditor.ShowNew(current.Value, services.Managers.ToArray());
+                if (credentials.HasBeenCanceled)
+                    return;
                 current.Value = credentials;
                 UpdateNode(tree.SelectedNode);
             }

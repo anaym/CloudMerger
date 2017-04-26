@@ -38,4 +38,13 @@ namespace CloudMerger.Core
         public HostUnavailable(Exception innerException) : this("", innerException)
         { }
     }
+
+    public class InconsistentFileSystemState : HostingException
+    {
+        public InconsistentFileSystemState(string message, Exception innerException = null) : base(message, innerException)
+        { }
+
+        public InconsistentFileSystemState(Exception innerException) : this("", innerException)
+        { }
+    }
 }

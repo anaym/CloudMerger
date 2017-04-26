@@ -64,13 +64,24 @@ namespace ConsoleApplication
         }
 
         [Command]
+        public async Task List(string path)
+        {
+            var i = 0;
+            foreach (var item in await hosting.GetDirectoryListAsync(path))
+            {
+                Console.WriteLine($"{i,3} {(item.IsFile ? 'F' : 'D')} '{item.Name}' {item.Size} {item.LastWriteTime}");
+                i++;
+            }
+        }
+
+        [Command]
         public async Task Upload(string from, string to = null)
         {
             to = to ?? from;
             Console.WriteLine($"upload '{from}' -> '{to}'");
             using (var stream = File.OpenRead(from))
             {
-                await hosting.UploadFileAsync(stream, new UPath(to));
+                await hosting.UploadFileAsync(stream, new UPath(to), new ConsoleProgressProvider());
             }
         }
 
@@ -81,16 +92,21 @@ namespace ConsoleApplication
             Console.WriteLine($"download '{from}' -> '{to}'");
             using (var stream = File.OpenWrite(to))
             {
-                await hosting.DownloadFileAsync(stream, new UPath(from));
+                await hosting.DownloadFileAsync(stream, new UPath(from), new ConsoleProgressProvider());
             }
         }
 
         [Command]
         public async Task Topology()
         {
-            topology = await TopologyEditor.ShowNew(topology, services);
+            var result = await TopologyEditor.ShowNew(topology, services);
+            if (result.HasBeenCanceled)
+                return;
+
+            topology = result;
             if (topology == null)
             {
+                Console.WriteLine("Warning: you describe empty topology!");
                 File.Delete(TopologyFileName);
                 hosting = null;
             }

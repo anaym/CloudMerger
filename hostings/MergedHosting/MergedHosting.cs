@@ -48,41 +48,31 @@ namespace MergedHosting
             var dir = taskPool.Completed.Where(t => t.Result.IsDirectory).ToList();
             var file = taskPool.Completed.Where(t => t.Result.IsFile).ToList();
 
-            if (dir.Count == 0 && file.Count == 0 && notFounded.Count == 0)
-                throw new ItemNotFound("All hostings unavailable :(");
-            else if (dir.Count == 0 && file.Count == 0 && notFounded.Count > 0)
-                throw new ItemNotFound();
-            else if (dir.Count > 0 && file.Count == 0)
-            {
-                if (notFounded.Count == 0)
-                    return dir.First().Result;
+            if (file.Count == 1 && dir.Count == 0)
+                return file[0].Result;
+            if (file.Count == 0 && dir.Count > 0)
+                return dir[0].Result.OnHostings(dir.SelectMany(d => d.Result.Hostings));
+            if (file.Count == 0 && dir.Count == 0)
+                throw new ItemNotFound(notFounded.Count > 0 ? "Iten not founded" : "Hosings unavailable");
 
-                await notFounded.Select(t => sources[t]).ToTask(h => h.MakeDirectoryAsync(path), Timeout).WhenAll();
-                return dir.First().Result;
-            }
-            else if (dir.Count == 0 && file.Count > 0)
-            {
-                if (file.Count == 1)
-                    return file.First().Result;
+            var fstat = $"Files on: {string.Join("; ", file.SelectMany(t => t.Result.Hostings).Select(h => h.Name))}";
+            var dstat = $"Directories on: {string.Join("; ", dir.SelectMany(t => t.Result.Hostings).Select(h => h.Name))}";
 
-                await file
-                    .OrderByDescending(t => t.Result.LastWriteTime)
-                    .Skip(1)
-                    .Select(t => sources[t])
-                    .ToTask(h => h.RemoveFileAsync(path))
-                    .WhenAll();
+            if (file.Count > 1 && dir.Count == 0)
+                throw new InconsistentFileSystemState($"More than one hosting contains file '{path}':\n{fstat}");
+            if (file.Count > 0 && dir.Count > 0)
+                throw new InconsistentFileSystemState($"Inconsistent item type: file or directory?\n{fstat}\n{dstat}");
 
-                return file.OrderByDescending(t => t.Result.LastWriteTime).First().Result;
-            }
-            else // dir.Count > 0 && file.Count > 0
-            {
-                throw new HostingException($"Unfixable merge problem: exist hostings, where '{path}' is file, but exist where it is dir");
-            }
+            throw new HostingException("Unexpected condition!");
         }
 
         public async Task<IEnumerable<ItemInfo>> GetDirectoryListAsync(UPath path)
         {
-            throw new NotImplementedException();
+            var withDir = await GetHostingsWithDirectory(path);
+            if (withDir.Count == 0)
+                throw new ItemNotFound();
+            //TODO: сливать директории и падать если файлы есть на разных хостингах
+            return (await Task.WhenAll(withDir.Select(h => h.GetDirectoryListAsync(path)))).SelectMany(l => l);
         }
 
         public async Task MakeDirectoryAsync(UPath path)
@@ -164,6 +154,27 @@ namespace MergedHosting
             if (withFile != null)
                 return withFile;
             throw new ItemNotFound($"File '{path}' not founded");
+        }
+
+        private async Task<List<IHosting>> GetHostingsWithDirectory(UPath path)
+        {
+            var withDir = new List<IHosting>();
+            var workedHostings = withDir.ToList();
+            var tasks = withDir.Select(h => h.IsDirectoryAsync(path).WithTimeOut(Timeout)).ToList();
+            while (tasks.Count > 0)
+            {
+                var completed = await Task.WhenAny(tasks);
+                var hosting = workedHostings[tasks.IndexOf(completed)];
+                if (completed.IsFaultedWith<InconsistentFileSystemState>())
+                    throw new InconsistentFileSystemState(completed.Exception?.InnerException);
+                if (!completed.IsFaulted && completed.Result)
+                {
+                    withDir.Add(hosting);
+                }
+                workedHostings.Remove(hosting);
+                tasks.Remove(completed);
+            }
+            return withDir;
         }
 
         private Task SolveCollision(IReadOnlyList<ItemInfo> files, IReadOnlyList<ItemInfo> dir)
