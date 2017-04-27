@@ -42,7 +42,7 @@ namespace CloudMerger.Core.Tree
                 {
                     var parent = stack.Peek().Nested.Last();
                     stack.Push(parent);
-                    stack.Peek().Nested.Add(new Node<string>(value));
+                    parent.Nested.Add(new Node<string>(value));
                 }
                 else if (indent == 0 && stack.Count == 0)
                 {
@@ -50,12 +50,14 @@ namespace CloudMerger.Core.Tree
                 }
                 else if (indent < stack.Count)
                 {
+                    if (indent <= 0 || stack.Count == 0)
+                        throw new InvalidOperationException($"Can`t decode: invalid indent: line: '{line}'");
                     stack.Pop(stack.Count - indent);
                     stack.Peek().Nested.Add(new Node<string>(value));
                 }
                 else
                 {
-                    throw new InvalidOperationException();       
+                    throw new InvalidOperationException($"Can`t decode: invalid indent: line: '{line}'");       
                 }
             }
             return stack.LastOrDefault();

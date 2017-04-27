@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CloudMerger.Core;
 using CloudMerger.Core.Primitives;
 using CloudMerger.Core.Tree;
+using CloudMerger.Core.Utility;
 using CloudMerger.HostingsManager;
 
 namespace CloudMerger.GuiPrimitives
@@ -179,7 +180,7 @@ namespace CloudMerger.GuiPrimitives
         private void UpdateNode(TreeNode node)
         {
             var from = (Node<OAuthCredentials>) node.Tag;
-            var title = from.Value?.Login ?? from.Value?.Token?.Substring(0, 8) ?? "";
+            var title = from.Value?.Login ?? "";
             node.Text = $"[{from.Value?.Service?.ToUpper() ?? "?"}] {title}";
             node.Expand();
             if (ok != null)
@@ -188,40 +189,21 @@ namespace CloudMerger.GuiPrimitives
 
         private bool Validate(TreeNode node)
         {
-            var v = Validate((Node<OAuthCredentials>) node.Tag);
-            foreach (var n in node.Nodes)
-            {
-                Validate((TreeNode)n);
-            }
-            if (v)
+            if (((Node<OAuthCredentials>)node.Tag).IsValid(services))
             {
                 node.ForeColor = Color.Black;
+                node.ImageKey = "ok";
+                node.SelectedImageKey = "ok";
                 return true;
             }
-            node.ForeColor = Color.Red;
-            return false;
-        }
 
-        private bool Validate(Node<OAuthCredentials> node)
-        {
-            if (node.Value?.Service == null)
-                return false;
-            if (services.IsContainsManager(node.Value.Service))
-            {
-                if (node.IsNode)
-                    return false;
-                return true;
-            }
-            else if (services.IsContainsMultiHostingManager(node.Value.Service))
-            {
-                if (node.IsLeaf)
-                    return false;
-                return node.Nested.All(Validate);
-            }
-            else
-            {
-                return false;
-            }
+            node.ImageKey = "error";
+            node.SelectedImageKey = "error";
+            node.ForeColor = Color.Red;
+            foreach (var n in node.Nodes)
+                Validate((TreeNode) n);
+
+            return false;
         }
 
         private void InitializeControls()
@@ -255,6 +237,9 @@ namespace CloudMerger.GuiPrimitives
             }
 
             tree = new TreeView {Dock = DockStyle.Fill, AutoSize = true};
+            tree.ImageList = new ImageList();
+            tree.ImageList.Images.Add("ok", Resource.Ok);
+            tree.ImageList.Images.Add("error", Resource.Error);
             table.Controls.Add(tree);
 
             var btable = new TableLayoutPanel

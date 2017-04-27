@@ -24,7 +24,8 @@ namespace ConsoleApplication
                     m.GetParameters().Select(p => p.Name), 
                     ExtractFunc(m, commandsProvider),
                     m.Name.ToLower(),
-                    m.GetCustomAttribute<CommandAttribute>().Description
+                    m.GetCustomAttribute<CommandAttribute>().Description,
+                    m.GetCustomAttribute<CommandAttribute>().UseShortAlias
                 ))
                 .ToArray();
         }

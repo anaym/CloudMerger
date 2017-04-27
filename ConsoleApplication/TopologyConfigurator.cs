@@ -18,13 +18,20 @@ namespace ConsoleApplication
         public const string TopologyFileName = "topology.ini";
         public IHosting Hosting { get; private set; }
 
-        public TopologyConfigurator(ServicesCollection services, HostingTreeBuilder treeBuilder, CredentialsFormatter formatter)
+        public TopologyConfigurator(ServicesCollection services, HostingTreeBuilder treeBuilder,
+            CredentialsFormatter formatter)
         {
             this.services = services;
             this.treeBuilder = treeBuilder;
             this.formatter = formatter;
-            LoadFromFile();
-
+            try
+            {
+                LoadFromFile();
+            }
+            catch (Exception ex)
+            {
+                ColoredConsole.WriteLine(ConsoleColor.Red, $"Can`t load topology:\n{ex.GetType().Name}\n{ex.Message}");
+            }
         }
 
         [Command("configure your accounts tree")]

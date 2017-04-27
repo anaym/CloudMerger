@@ -23,6 +23,24 @@ namespace ConsoleApplication
                 cmnds[command.Name][command.Arguments.Length] = command;
             }
             this.commands = cmnds;
+
+            var alias = new Dictionary<char, string>();
+            foreach (var command in commands.Where(c => c.UseShortAlias))
+            {
+                var a = command.Name[0];
+                if (alias.ContainsKey(a) || this.commands.ContainsKey(a.ToString()))
+                {
+                    if (alias[a] != command.Name)
+                    {
+                        alias[a] = null;
+                    }
+                }
+                else
+                {
+                    alias[a] = command.Name;
+                }
+            }
+            this.aliases = alias;
         }
 
         public void Run()
@@ -59,6 +77,10 @@ namespace ConsoleApplication
             var cmd = parts[0].ToLower();
             var args = parts.Skip(1).ToArray();
 
+            if (cmd.Length == 1 && aliases.ContainsKey(cmd[0]))
+                if (aliases[cmd[0]] != null)
+                    cmd = aliases[cmd[0]];
+
             if (!commands.ContainsKey(cmd))
                 throw new ArgumentException($"Unexpected command {cmd}, use 'help' for help");
             if (!commands[cmd].ContainsKey(args.Length))
@@ -82,7 +104,12 @@ namespace ConsoleApplication
             var a = ConsoleColor.Yellow;
             foreach (var command in commands.SelectMany(p => p.Value.Values))
             {
-                ColoredConsole.WriteLine(f, $"\t{command.Name}", o, '(', a, string.Join(" ", command.Arguments), o, ')');
+                Console.Write("\t");
+                if (aliases.ContainsKey(command.Name[0]) && aliases[command.Name[0]] == command.Name)
+                    ColoredConsole.Write(f, command.Name[0], " ");
+                else
+                    ColoredConsole.Write("  ");
+                ColoredConsole.WriteLine(f, command.Name, o, '(', a, string.Join(" ", command.Arguments), o, ')');
             }
         }
 
@@ -126,5 +153,6 @@ namespace ConsoleApplication
             new Regex(@"^(?<command>\S+?)((\s+""(?<arg>[^""]*?)"")|(\s+(?<arg>\S+?)))*\s*$");
 
         private readonly IReadOnlyDictionary<string, Dictionary<int, Command>> commands;
+        private readonly IReadOnlyDictionary<char, string> aliases;
     }
 }

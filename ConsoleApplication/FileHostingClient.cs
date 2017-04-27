@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CloudMerger.Core;
 using CloudMerger.Core.Primitives;
+using CloudMerger.Core.Utility;
 
 namespace ConsoleApplication
 {
@@ -15,14 +16,14 @@ namespace ConsoleApplication
             dirListVisuzlizer = new ConsoleTableVisualizer(new[] { ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Yellow }, new[] { -1, 10, 10 }, 0);
         }
 
-        [Command("show list of nested files and directories")]
+        [Command("show list of nested files and directories", true)]
         public async Task List(string path)
         {
             var items = await Hosting.GetDirectoryListAsync(path);
             dirListVisuzlizer.PagedShow(items.Select(i => new[] { i.Name, i.LastWriteTime.ToString(), i.IsDirectory ? "" : i.Size.ToShortString() }));
         }
 
-        [Command("upload file to cloud")]
+        [Command("upload file to cloud", true)]
         public async Task Upload(string from, string to = null)
         {
             to = to ?? from;
@@ -33,7 +34,7 @@ namespace ConsoleApplication
             }
         }
 
-        [Command("download file from cloud")]
+        [Command("download file from cloud", true)]
         public async Task Download(string from, string to = null)
         {
             to = to ?? from;
@@ -44,7 +45,7 @@ namespace ConsoleApplication
             }
         }
 
-        [Command("show info about free disk space")]
+        [Command("show info about free disk space", true)]
         public async Task Info()
         {
             var o = Console.ForegroundColor;
@@ -64,7 +65,7 @@ namespace ConsoleApplication
             ColoredConsole.WriteLine(g, string.Join("", Enumerable.Repeat(".", maxCells - (int)usedCells)));
         }
 
-        [Command("show info about file or directory")]
+        [Command("show info about file or directory", true)]
         public async Task Info(string path)
         {
             var o = Console.ForegroundColor;
@@ -82,10 +83,25 @@ namespace ConsoleApplication
                 ColoredConsole.WriteLine("\t", b, hosting.Name);
         }
 
-        [Command("create empty directory")]
+        [Command("create empty directory", true)]
         public async Task MakeDir(string path)
         {
             await Hosting.MakeDirectoryAsync(path);
+        }
+
+        [Command("rename file or folder", true)]
+        public async Task Rename(string path, string newName)
+        {
+            await Hosting.RenameAsync(path, newName);
+        }
+
+        [Command("remove file or directory [maybe with files]")]
+        public async Task Delete(string path)
+        {
+            if (await Hosting.IsDirectoryAsync(path))
+                await Hosting.RemoveDirectoryAsync(path, true);
+            else
+                await Hosting.RemoveFileAsync(path);
         }
 
         private IHosting Hosting

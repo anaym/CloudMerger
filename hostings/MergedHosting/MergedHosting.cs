@@ -127,6 +127,8 @@ namespace MergedHosting
 
         public async Task RenameAsync(UPath path, string newName)
         {
+            if (new UPath(newName).Parent != "/")
+                throw new ArgumentException("Expected name, not path", nameof(newName));
             var dest = path.Parent.SubPath(newName);
             if (!await IsExistAsync(path))
                 throw new ItemNotFound("Source is not founded");

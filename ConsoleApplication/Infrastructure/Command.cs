@@ -9,12 +9,14 @@ namespace ConsoleApplication
         public readonly string[] Arguments;
         public readonly string Description;
         public readonly string Name;
+        public readonly bool UseShortAlias;
 
-        public Command(IEnumerable<string> arguments, Action<string[]> executor, string name, string description)
+        public Command(IEnumerable<string> arguments, Action<string[]> executor, string name, string description, bool useShortAlias)
         {
             Arguments = arguments.ToArray();
             this.executor = executor;
             Description = description;
+            UseShortAlias = useShortAlias;
             Name = name;
         }
 
