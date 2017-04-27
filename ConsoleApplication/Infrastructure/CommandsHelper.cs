@@ -33,19 +33,7 @@ namespace ConsoleApplication
         private static Action<string[]> ExtractFunc(MethodInfo info, object self)
         {
             if (typeof(Task).IsAssignableFrom(info.ReturnType))
-                return args =>
-                {
-                    try
-                    {
-                        ((Task)info.Invoke(self, args)).Wait();
-                    }
-                    catch (AggregateException ex)
-                    {
-                        if (ex.InnerException != null)
-                            throw ex.InnerException;
-                        throw ex.InnerExceptions.First();
-                    }
-                };
+                return args => ((Task)info.Invoke(self, args)).Wait();
             return args => info.Invoke(self, args);
         }
     }

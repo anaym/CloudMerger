@@ -77,6 +77,7 @@ namespace ConsoleApplication
             ColoredConsole.WriteLine(b, info.IsDirectory ? "DIRECTORY" : "FILE");
             ColoredConsole.WriteLine("Name:\t", b, info.Name);
             ColoredConsole.WriteLine("Size:\t", b, info.Size);
+            ColoredConsole.WriteLine("  bytes:", b, info.Size.TotalBytes, " B");
             ColoredConsole.WriteLine("LW time:", b, info.LastWriteTime);
             ColoredConsole.WriteLine("On hostings: ");
             foreach (var hosting in info.Hostings)

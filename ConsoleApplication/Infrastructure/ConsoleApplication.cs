@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using log4net;
+using log4net.Config;
 
 namespace ConsoleApplication
 {
@@ -41,6 +43,7 @@ namespace ConsoleApplication
                 }
             }
             this.aliases = alias;
+            XmlConfigurator.Configure();
         }
 
         public void Run()
@@ -63,6 +66,7 @@ namespace ConsoleApplication
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"Error: {ex.GetType().Name}");
                     Console.WriteLine(ex.Message);
+                    log.Error($"Error", ex);
                 }
                 finally
                 {
@@ -132,6 +136,8 @@ namespace ConsoleApplication
                     ColoredConsole.WriteLine(c, command.Value.Description);
             }
         }
+
+        protected virtual ILog log => LogManager.GetLogger(typeof(ConsoleApplication));
 
         private string[] GetParts(string line)
         {

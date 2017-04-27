@@ -30,7 +30,7 @@ namespace ConsoleApplication
             }
             catch (Exception ex)
             {
-                ColoredConsole.WriteLine(ConsoleColor.Red, $"Can`t load topology:\n{ex.GetType().Name}\n{ex.Message}");
+                ColoredConsole.WriteLine(ConsoleColor.Red, $"Can`t load topology:\n{ex.GetType().Name}\n{ex.Message}\n{ex.StackTrace}");
             }
         }
 
@@ -65,11 +65,10 @@ namespace ConsoleApplication
 
         private void SaveToFile()
         {
+            if (File.Exists(TopologyFileName))
+                File.Delete(TopologyFileName);
             if (topology == null)
-            {
-                if (File.Exists(TopologyFileName))
-                    File.Delete(TopologyFileName);
-            }
+                return;
             using (var file = File.OpenWrite(TopologyFileName))
             {
                 using (var text = new StreamWriter(file))
