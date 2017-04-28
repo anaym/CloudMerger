@@ -7,8 +7,8 @@ namespace CloudMerger.Core.Primitives
     {
         public static readonly Regex ServicePattern = new Regex(@"^[^\s][^\n\0\r]*?$");
         public static readonly Regex LoginPattern = new Regex(@"^[^\n\0\r\s]*?$");
-        public static readonly Regex TokenPattern = new Regex(@"^[a-zA-Z0-9\\=/-]*?$");
-        public static readonly Regex CredentialsPattern = new Regex(@"^[\s]*(?<service>[^\n\0\r]*?) (?<login>[^\n\0\r\s]+) (?<token>[a-zA-Z0-9\\=/\-?]+)$");
+        public static readonly Regex TokenPattern = new Regex(@"^[_a-zA-Z0-9\\=/-]*?$");
+        public static readonly Regex CredentialsPattern = new Regex(@"^[\s]*(?<service>[^\n\0\r]*?) (?<login>[^\n\0\r\s]+) (?<token>[_a-zA-Z0-9\\=/?-]+)$");
         public const string NullString = "?";
 
         public static OAuthCredentials FromString(string s)

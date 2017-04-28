@@ -42,15 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMultiHostingManager.cs" />
     <Compile Include="Primitives\DiskSpaceInfo.cs" />
+    <Compile Include="Primitives\HostingsTreeBuilder\CredentialsFormatter.cs" />
+    <Compile Include="Primitives\HostingsTreeBuilder\HostingTreeBuilder.cs" />
+    <Compile Include="Primitives\HostingsTreeBuilder\ServicesCollection.cs" />
     <Compile Include="Primitives\OAuthCredentials.cs" />
+    <Compile Include="Tree\Node.cs" />
+    <Compile Include="Tree\NodeFormatter.cs" />
+    <Compile Include="Tree\TreeHelpers.cs" />
+    <Compile Include="Utility\CredentialsTreeValidator.cs" />
     <Compile Include="Utility\DirectoryHelper.cs" />
     <Compile Include="Primitives\FileSize.cs" />
+    <Compile Include="Utility\FileHostingHelper.cs" />
     <Compile Include="Utility\StreamHelper.cs" />
     <Compile Include="Utility\TaskHelper.cs" />
     <Compile Include="HostingException.cs" />
-    <Compile Include="IFileHosting.cs" />
-    <Compile Include="IService.cs" />
+    <Compile Include="IHosting.cs" />
+    <Compile Include="IHostingManager.cs" />
     <Compile Include="Primitives\ItemInfo.cs" />
     <Compile Include="Primitives\ItemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

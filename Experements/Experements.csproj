@@ -64,10 +64,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CloudMerger.Application\CloudMerger.Application.csproj">
-      <Project>{b9abe1cb-6905-4955-b92a-912d97545792}</Project>
-      <Name>CloudMerger.Application</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CloudMerger.Core\CloudMerger.Core.csproj">
       <Project>{83233b96-0803-45d6-be22-7a3b31534f60}</Project>
       <Name>CloudMerger.Core</Name>
@@ -75,6 +71,10 @@
     <ProjectReference Include="..\CloudMerger.GuiPrimitives\CloudMerger.GuiPrimitives.csproj">
       <Project>{D694059E-9025-439F-90C3-FB59EAC84B17}</Project>
       <Name>CloudMerger.GuiPrimitives</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CloudMerger.HostingsManager\CloudMerger.HostingsManager.csproj">
+      <Project>{b9abe1cb-6905-4955-b92a-912d97545792}</Project>
+      <Name>CloudMerger.HostingsManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\hostings\YandexFileHosting\YandexFileHosting.csproj">
       <Project>{88ce6792-efdb-485c-9316-4c759ea152c9}</Project>

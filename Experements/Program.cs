@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CloudMerger.Application;
-using CloudMerger.Application.Topology;
 using CloudMerger.Core;
 using CloudMerger.Core.Primitives;
 using CloudMerger.GuiPrimitives;
+using CloudMerger.HostingsManager;
 using YandexFileHosting;
 
 namespace Experements
@@ -16,8 +15,8 @@ namespace Experements
     {
         static void Main(string[] args)
         {
-            //var f = new YandexService().AuthorizeAsync();
-            //var s = new YandexService().AuthorizeAsync();
+            //var f = new YandexHostingManager().AuthorizeAsync();
+            //var s = new YandexHostingManager().AuthorizeAsync();
             //Task.WaitAll(f, s);
 
             OAuthCredentials.FromString("123 login ---");
@@ -26,7 +25,7 @@ namespace Experements
             var task = OAuthCredentialsEditor.ShowNew(new OAuthCredentials {Service = "yandex DisK"}, services);
             task.Wait();
 
-            var host = new YandexService().GetFileHostingFor(new OAuthCredentials {Token = "AQAEA7qiAp8AAAQv83T09kxsZEXmiSIla-bv4ho", Service = "yandex disk"});
+            var host = new YandexHostingManager().GetFileHostingFor(new OAuthCredentials {Token = "AQAEA7qiAp8AAAQv83T09kxsZEXmiSIla-bv4ho", Service = "yandex disk"});
             var t = host.GetSpaceInfoAsync();
             t.Wait();
             Console.WriteLine(t.Result);
@@ -40,7 +39,7 @@ namespace Experements
             Console.WriteLine(task.Result);
             return;
 
-            var loader = new HostingsTreeSerializer(new Dictionary<string, Func<IFileHosting[], IFileHosting>>
+            var loader = new HostingsTreeSerializer(new Dictionary<string, Func<IHosting[], IHosting>>
             {
                 {"merged hosting", hostings => new MergedHosting(hostings, TimeSpan.FromMilliseconds(5000))}
             });
@@ -67,13 +66,13 @@ namespace Experements
         {
 
 
-            var task = await new YandexService().AuthorizeAsync();
+            var task = await new YandexHostingManager().AuthorizeAsync();
             //Console.WriteLine(task.Result);
             //var token = task.Result;
             var tfcmToken = "AQAEA7qiAp8AAAQv83T09kxsZEXmiSIla-bv4ho";
 
             var token = "AQAEA7qhwJsLAAQv81iOHoUvvkxzjVPcOVYNKUs";
-            var hosting = new YandexService().GetFileHostingFor(new OAuthCredentials());
+            var hosting = new YandexHostingManager().GetFileHostingFor(new OAuthCredentials());
             //Console.WriteLine(await hosting.FreeSpaceAsync());
             //Console.WriteLine(await hosting.UsedSpaceAsync());
             //Console.WriteLine(await hosting.TotalSpaceAsync());

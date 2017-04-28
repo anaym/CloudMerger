@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CloudMerger.Core.Primitives
 { 
@@ -8,7 +9,7 @@ namespace CloudMerger.Core.Primitives
         public string Name { get; }
         public UPath Path { get; }
 
-        public IReadOnlyList<IFileHosting> Hostings { get; }
+        public IReadOnlyList<IHosting> Hostings { get; }
 
         public bool IsDirectory { get; }
         public bool IsFile { get; }
@@ -17,7 +18,7 @@ namespace CloudMerger.Core.Primitives
         public FileSize Size { get; }
         public DateTime LastWriteTime { get; }
 
-        public ItemInfo(UPath path, ItemType type, FileSize size, DateTime lastWriteTime, params IFileHosting[] hostings)
+        public ItemInfo(UPath path, ItemType type, FileSize size, DateTime lastWriteTime, params IHosting[] hostings)
         {
             Path = path;
             Name = path.Name;
@@ -27,6 +28,11 @@ namespace CloudMerger.Core.Primitives
             Size = size;
             LastWriteTime = lastWriteTime;
             Hostings = hostings;
+        }
+
+        public ItemInfo OnHostings(IEnumerable<IHosting> hostings)
+        {
+            return new ItemInfo(Path, Type, Size, LastWriteTime, hostings.ToArray());
         }
     }
 }

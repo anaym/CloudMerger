@@ -11,14 +11,14 @@ namespace YandexFileHosting.Test
     public class HostingTestBase
     {
         protected const string Token = "AQAEA7qiAp8AAAQv83T09kxsZEXmiSIla-bv4ho";
-        protected IService Service = new YandexService();
-        protected IFileHosting Hosting;
+        protected IHostingManager HostingManager = new YandexHostingManager();
+        protected IHosting Hosting;
         protected string interfaceName = "Local Area Connection";
 
         [SetUp]
         public virtual void SetUp()
         {
-            Hosting = Service.GetFileHostingFor(new OAuthCredentials { Token = Token, Service = Service.Name });
+            Hosting = HostingManager.GetFileHostingFor(new OAuthCredentials { Token = Token, Service = HostingManager.Name });
         }
 
         protected void AssertThrows<T>(Task task)
