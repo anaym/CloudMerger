@@ -46,7 +46,11 @@ namespace ConsoleApplication
 
             var configurator = kernel.Get<TopologyConfigurator>();
             var client = kernel.Get<FileHostingClient>();
-            new ConsoleApplication(configurator.ExtractCommands(), client.ExtractCommands()).Run();
+
+            var commands = new CommandsCollection();
+            commands.AddCommandsProvider(configurator);
+            commands.AddCommandsProvider(client);
+            ConsoleApplication.Run(commands);
         }
     }
 }

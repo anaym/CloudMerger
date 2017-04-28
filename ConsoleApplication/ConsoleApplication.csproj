@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\CommandsHelper.cs" />
+    <Compile Include="Infrastructure\CommandsCollection.cs" />
     <Compile Include="Infrastructure\ColoredConsole.cs" />
     <Compile Include="TopologyConfigurator.cs" />
     <Compile Include="FileHostingClient.cs" />

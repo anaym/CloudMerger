@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using log4net;
@@ -9,89 +10,63 @@ namespace ConsoleApplication
 {
     public class ConsoleApplication
     {
-        public ConsoleApplication(params Command[][] commands)
-            : this(commands.SelectMany(g => g).ToArray())
-        { }
+        public const bool MeasureTime = true;
 
-        public ConsoleApplication(params Command[] commands)
+        public static void Run(CommandsCollection commands)
         {
-            var cmnds = new Dictionary<string, Dictionary<int, Command>>();
-            foreach (var command in commands.Concat(this.ExtractCommands()))
-            {
-                if (!cmnds.ContainsKey(command.Name))
-                    cmnds[command.Name] = new Dictionary<int, Command>();
-                if (cmnds[command.Name].ContainsKey(command.Arguments.Length))
-                    throw new InvalidOperationException($"Command {command}`{command.Arguments.Length} already exist");
-                cmnds[command.Name][command.Arguments.Length] = command;
-            }
-            this.commands = cmnds;
+            var application = new ConsoleApplication(commands);
+            application.Run();
+        }
 
-            var alias = new Dictionary<char, string>();
-            foreach (var command in commands.Where(c => c.UseShortAlias))
-            {
-                var a = command.Name[0];
-                if (alias.ContainsKey(a) || this.commands.ContainsKey(a.ToString()))
-                {
-                    if (alias[a] != command.Name)
-                    {
-                        alias[a] = null;
-                    }
-                }
-                else
-                {
-                    alias[a] = command.Name;
-                }
-            }
-            this.aliases = alias;
-            XmlConfigurator.Configure();
+        private ConsoleApplication(CommandsCollection commands)
+        {
+            commands.AddCommandsProvider(this);
+            this.commands = commands;
         }
 
         public void Run()
         {
             while (true)
             {
+                ColoredConsole.Write(ConsoleColor.White, "> ");
+                var command = Console.ReadLine();
+                var timer = Stopwatch.StartNew();
                 try
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.Write("> ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    var command = Console.ReadLine();
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    log.Info($"Executing '{command}'");
                     Execute(command);
+                    log.Info($"Executing '{command}' completed");
                 }
                 catch (Exception ex)
                 {
                     if (ex is AggregateException)
-                        ex = ((AggregateException)ex).InnerException;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Error: {ex.GetType().Name}");
-                    Console.WriteLine(ex.Message);
-                    log.Error($"Error", ex);
+                        ex = ((AggregateException) ex).InnerException;
+                    ColoredConsole.WriteLine(ConsoleColor.DarkRed, "Error: ", ConsoleColor.Red, ex.GetType().Name);
+                    ColoredConsole.WriteLine(ConsoleColor.Red, ex.Message);
+                    log.Error($"Error in command `{command}`", ex);
                 }
                 finally
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    if (MeasureTime)
+                        ColoredConsole.WriteLine(ConsoleColor.DarkYellow, $"Execution time - {timer.Elapsed}");
                 }
             }
         }
 
-        public void Execute(string command)
+        public void Execute(string commandLine)
         {
-            var parts = GetParts(command);
-            var cmd = parts[0].ToLower();
-            var args = parts.Skip(1).ToArray();
+            var parts = GetParts(commandLine);
+            var commandName = parts[0].ToLower();
+            var arguments = parts.Skip(1).ToArray();
 
-            if (cmd.Length == 1 && aliases.ContainsKey(cmd[0]))
-                if (aliases[cmd[0]] != null)
-                    cmd = aliases[cmd[0]];
+            var command = commands.FindCommand(commandName, arguments.Length);
+            if (command == null)
+                throw new ArgumentException($"Unexpected command {commandName}`{arguments.Length}. Use `help`");
 
-            if (!commands.ContainsKey(cmd))
-                throw new ArgumentException($"Unexpected command {cmd}, use 'help' for help");
-            if (!commands[cmd].ContainsKey(args.Length))
-                throw new ArgumentException($"Unexpected command {cmd}`{args.Length}, use 'help' for help");
-
-            commands[cmd][args.Length].Execute(args);
+            command.Execute(arguments);
         }
+
+        #region Default commands
 
         [Command]
         public void Exit()
@@ -106,21 +81,16 @@ namespace ConsoleApplication
             var o = Console.ForegroundColor;
             var f = ConsoleColor.Cyan;
             var a = ConsoleColor.Yellow;
-            foreach (var command in commands.SelectMany(p => p.Value.Values))
+            foreach (var command in commands.Commands)
             {
-                Console.Write("\t");
-                if (aliases.ContainsKey(command.Name[0]) && aliases[command.Name[0]] == command.Name)
-                    ColoredConsole.Write(f, command.Name[0], " ");
-                else
-                    ColoredConsole.Write("  ");
-                ColoredConsole.WriteLine(f, command.Name, o, '(', a, string.Join(" ", command.Arguments), o, ')');
+                ColoredConsole.WriteLine("\t", f, command.Name, o, '(', a, string.Join(" ", command.Arguments), o, ')');
             }
         }
 
         [Command("show full info about command")]
         public void Help(string commandName)
         {
-            if (!commands.ContainsKey(commandName))
+            if (!commands.IsContains(commandName))
                 throw new ArgumentException($"Unexpected command for help - {commandName}");
             var commandGroup = commands[commandName];
             var o = Console.ForegroundColor;
@@ -129,15 +99,15 @@ namespace ConsoleApplication
             var c = ConsoleColor.DarkGreen;
             foreach (var command in commandGroup)
             {
-                ColoredConsole.WriteLine(f, "\t", command.Value.Name, o, '`', command.Key);
-                if (command.Value.Arguments.Length > 0)
-                    ColoredConsole.WriteLine(a, string.Join(" ", command.Value.Arguments));
-                if (!string.IsNullOrWhiteSpace(command.Value.Description))
-                    ColoredConsole.WriteLine(c, command.Value.Description);
+                ColoredConsole.WriteLine(f, "\t", command.Name, o, '`', command.Arguments.Length);
+                if (command.Arguments.Length > 0)
+                    ColoredConsole.WriteLine(a, string.Join(" ", command.Arguments));
+                if (!string.IsNullOrWhiteSpace(command.Description))
+                    ColoredConsole.WriteLine(c, command.Description);
             }
         }
 
-        protected virtual ILog log => LogManager.GetLogger(typeof(ConsoleApplication));
+        #endregion
 
         private string[] GetParts(string line)
         {
@@ -148,7 +118,7 @@ namespace ConsoleApplication
             var cmd = match.Groups["command"].Value;
             var raw = match.Groups["arg"].Captures;
 
-            var args = new List<string> {cmd};
+            var args = new List<string> { cmd };
             for (int i = 0; i < raw.Count; i++)
                 args.Add(raw[i].Value);
 
@@ -158,7 +128,31 @@ namespace ConsoleApplication
         private readonly Regex commandRe =
             new Regex(@"^(?<command>\S+?)((\s+""(?<arg>[^""]*?)"")|(\s+(?<arg>\S+?)))*\s*$");
 
-        private readonly IReadOnlyDictionary<string, Dictionary<int, Command>> commands;
-        private readonly IReadOnlyDictionary<char, string> aliases;
+        private readonly CommandsCollection commands;
+
+        static readonly ILog log;
+
+        static ConsoleApplication()
+        {
+            try
+            {
+                log = LogManager.GetLogger(typeof(ConsoleApplication));
+                XmlConfigurator.Configure();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Application initializer failure, sorry\n");
+                Console.WriteLine(ex.GetType().Name);
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                Environment.Exit(1);
+            }
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+            {
+                log.Fatal("Fatal error, application stopped", args.ExceptionObject as Exception);
+                Console.WriteLine($"Fatal error, application stopped: {args.ExceptionObject.GetType()}");
+                Environment.Exit(2);
+            };
+        }
     }
 }

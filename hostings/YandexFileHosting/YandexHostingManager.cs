@@ -35,7 +35,7 @@ namespace YandexFileHosting
 
         public override string ToString() => Name;
 
-        private readonly Regex accessTokenRegex= new Regex(@"access_token=(?<token>sdsdsdssd[_a-zA-Z0-9-]+?)&");
+        private readonly Regex accessTokenRegex= new Regex(@"access_token=(?<token>[_a-zA-Z0-9-]+?)&");
         private readonly Regex loginRegex= new Regex(@"var login ?= ?""(?<login>[^"";\s]+?)""");
     }
 }

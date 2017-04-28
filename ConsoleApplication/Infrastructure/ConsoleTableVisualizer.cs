@@ -14,7 +14,7 @@ namespace ConsoleApplication
         public ConsoleTableVisualizer(ConsoleColor[] colors, int[] sizes, int? dynamicColumnIndex = null)
         {
             if (sizes.Length != colors.Length)
-                throw new ArgumentException("Inconsisten sizes and colors arrays sizes");
+                throw new ArgumentException("Inconsisten sizes and colors arrays");
 
             this.colors = colors;
             this.sizes = sizes;
@@ -45,7 +45,6 @@ namespace ConsoleApplication
             }
             Console.WriteLine();
         }
-
 
         public void Show(IEnumerable<IEnumerable<string>> rows)
         {

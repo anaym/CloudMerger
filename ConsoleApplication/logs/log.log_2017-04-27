@@ -1,0 +1,114 @@
+[Start of logging]
+27.04.2017 18:09:42.213 ERROR    8 Error System.ArgumentException: Unexpected command dfdsdsedfsd, use 'help' for help
+   в ConsoleApplication.ConsoleApplication.Execute(String command) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 90
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 60
+ 
+27.04.2017 18:09:42.219 INFO     8 WTF  
+[Start of logging]
+27.04.2017 18:11:33.102 ERROR    9 Error System.OverflowException: «начение было недопустимо малым или недопустимо большим дл€ Int32.
+   в ConsoleApplication.CommandsHelper.<>c__DisplayClass1_0.<ExtractFunc>b__0(String[] args) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\CommandsHelper.cs:строка 45
+   в ConsoleApplication.Command.Execute(String[] arguments) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\Command.cs:строка 27
+   в ConsoleApplication.ConsoleApplication.Execute(String command) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 93
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 60
+ 
+[Start of logging]
+27.04.2017 18:13:37.495 ERROR    8 Error System.ArgumentException: Unexpected command log, use 'help' for help
+   в ConsoleApplication.ConsoleApplication.Execute(String command) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 89
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 60
+ 
+27.04.2017 18:14:06.231 ERROR    8 Error System.OverflowException: «начение было недопустимо малым или недопустимо большим дл€ Int32.
+   в System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   в System.Int32.Parse(String s)
+   в Disk.SDK.Utils.ResponseParser.ParseItems(String currentPath, String responseText)
+   в Disk.SDK.Utils.ResponseParser.ParseItem(String currentPath, String responseText)
+   в Disk.SDK.DiskAsyncClient.<GetItemInfoAsync>d__5.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в YandexFileHosting.YandexHosting.<GetDirectoryListAsync>d__6.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__1.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 22
+ 
+27.04.2017 18:15:10.099 ERROR    8 Error System.OverflowException: «начение было недопустимо малым или недопустимо большим дл€ Int32.
+   в System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   в System.Int32.Parse(String s)
+   в Disk.SDK.Utils.ResponseParser.ParseItems(String currentPath, String responseText)
+   в Disk.SDK.Utils.ResponseParser.ParseItem(String currentPath, String responseText)
+   в Disk.SDK.DiskAsyncClient.<GetItemInfoAsync>d__5.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в YandexFileHosting.YandexHosting.<GetItemInfoAsync>d__5.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<Info>d__5.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 75
+ 
+[Start of logging]
+27.04.2017 18:22:24.637 ERROR   10 Error System.OverflowException: «начение было недопустимо малым или недопустимо большим дл€ Int32.
+   в System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   в System.Int32.Parse(String s)
+   в Disk.SDK.Utils.ResponseParser.ParseItems(String currentPath, String responseText)
+   в Disk.SDK.Utils.ResponseParser.ParseItem(String currentPath, String responseText)
+   в Disk.SDK.DiskAsyncClient.<GetItemInfoAsync>d__5.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в YandexFileHosting.YandexHosting.<GetDirectoryListAsync>d__6.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__1.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 22
+ 
+[Start of logging]
+27.04.2017 18:23:54.757 ERROR    9 Error System.OverflowException: «начение было недопустимо малым или недопустимо большим дл€ Int32.
+   в System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   в System.Int32.Parse(String s)
+   в Disk.SDK.Utils.ResponseParser.ParseItems(String currentPath, String responseText)
+   в Disk.SDK.Utils.ResponseParser.ParseItem(String currentPath, String responseText)
+   в Disk.SDK.DiskAsyncClient.<GetItemInfoAsync>d__5.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в YandexFileHosting.YandexHosting.<GetDirectoryListAsync>d__6.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__1.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 22
+ 
+[Start of logging]
+27.04.2017 18:25:51.006 ERROR    9 Error System.ArgumentException: Unexpected command log, use 'help' for help
+   в ConsoleApplication.ConsoleApplication.Execute(String command) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 89
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 60
+ 
+[End of logging]
+
+[Start of logging]
+27.04.2017 20:37:49.204 ERROR    1 Error CloudMerger.Core.ItemNotFound: Iten not founded
+   в MergedHosting.MergedHosting.<GetItemInfoAsync>d__6.MoveNext()
+---  онец трассировка стека из предыдущего расположени€, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<Info>d__5.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 75
+ 
+27.04.2017 20:41:58.173 ERROR    1 Error System.FormatException: Invalid line format: ``
+   в ConsoleApplication.ConsoleApplication.GetParts(String line) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 146
+   в ConsoleApplication.ConsoleApplication.Execute(String command) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 80
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 60
+ 
+27.04.2017 20:42:26.214 ERROR    1 Error System.FormatException: Invalid line format: ``
+   в ConsoleApplication.ConsoleApplication.GetParts(String line) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 146
+   в ConsoleApplication.ConsoleApplication.Execute(String command) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 80
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 60
+ 
