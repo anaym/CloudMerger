@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CloudMerger.Core;
 using CloudMerger.Core.Primitives;
@@ -13,7 +14,15 @@ namespace ConsoleApplication
         public FileHostingClient(IHostingProvider hostingProvider)
         {
             this.hostingProvider = hostingProvider;
+            successes = new ConsoleMultifileProgressProvider(true, "success: ");
+            failures = new ConsoleMultifileProgressProvider(false, "fail on: ");
             dirListVisuzlizer = new ConsoleTableVisualizer(new[] { ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Yellow }, new[] { -1, 10, 10 }, 0);
+        }
+
+        [Command("show list of nested files and directories (root directory)", true)]
+        public async Task List()
+        {
+            await List("/");
         }
 
         [Command("show list of nested files and directories", true)]
@@ -23,15 +32,25 @@ namespace ConsoleApplication
             dirListVisuzlizer.PagedShow(items.Select(i => new[] { i.Name, i.LastWriteTime.ToString(), i.IsDirectory ? "" : i.Size.ToShortString() }));
         }
 
+        [Command("show list of nested files and directories (matched by regexp)", true)]
+        public async Task List(string path, string pattern)
+        {
+            var re = new Regex(pattern);
+            var items = await Hosting.GetDirectoryListAsync(path);
+            dirListVisuzlizer.PagedShow(items
+                .Where(i => re.IsMatch(i.Name))
+                .Select(i => new[] { i.Name, i.LastWriteTime.ToString(), i.IsDirectory ? "" : i.Size.ToShortString() }));
+        }
+
         [Command("upload file to cloud", true)]
         public async Task Upload(string from, string to = null)
         {
             to = to ?? from;
             Console.WriteLine($"upload '{from}' -> '{to}'");
-            using (var stream = File.OpenRead(from))
-            {
-                await Hosting.UploadFileAsync(stream, new UPath(to), new ConsoleProgressProvider());
-            }
+            if (File.Exists(from))
+                await Hosting.UploadFileAsync(new FileInfo(from), to, new ConsoleProgressProvider());
+            else
+                await Hosting.UploadDirectoryAsync(new DirectoryInfo(from), to, failures, successes, (p, e) => ConsoleApplication.Log(p, e));
         }
 
         [Command("download file from cloud", true)]
@@ -39,10 +58,12 @@ namespace ConsoleApplication
         {
             to = to ?? from;
             Console.WriteLine($"download '{from}' -> '{to}'");
-            using (var stream = File.OpenWrite(to))
-            {
-                await Hosting.DownloadFileAsync(stream, new UPath(from), new ConsoleProgressProvider());
-            }
+            if (await Hosting.IsFileAsync(from))
+                await Hosting.DownloadFileAsync(from, new FileInfo(to), new ConsoleProgressProvider());
+            else if  (await Hosting.IsDirectoryAsync(from))
+                await Hosting.DownloadDirectoryAsync(from, new DirectoryInfo(to), failures, successes);
+            else
+                throw new ItemNotFound();
         }
 
         [Command("show info about free disk space", true)]
@@ -54,8 +75,9 @@ namespace ConsoleApplication
             var b = ConsoleColor.Cyan;
             var sizes = await Hosting.GetSpaceInfoAsync();
 
-            var usedPercent = 100 * sizes.UsedSpace.TotalBytes / sizes.TotalSpace.TotalBytes;
-            var freePercent = 100 * sizes.FreeSpace.TotalBytes / sizes.TotalSpace.TotalBytes;
+            var total = sizes.TotalSpace.TotalBytes;
+            var usedPercent = total == 0 ? 0 : 100 * sizes.UsedSpace.TotalBytes / total;
+            var freePercent = total == 0 ? 0 : 100 * sizes.FreeSpace.TotalBytes / total;
             ColoredConsole.WriteLine(o, "Used ", r, sizes.UsedSpace, o, " from ", b, sizes.TotalSpace, o, " - ", r, usedPercent, "%");
             ColoredConsole.WriteLine(o, "Free ", g, sizes.FreeSpace, o, " from ", b, sizes.TotalSpace, o, " - ", g, freePercent, "%");
 
@@ -117,5 +139,7 @@ namespace ConsoleApplication
         }
         private readonly IHostingProvider hostingProvider;
         private readonly ConsoleTableVisualizer dirListVisuzlizer;
+        private ConsoleMultifileProgressProvider failures;
+        private ConsoleMultifileProgressProvider successes;
     }
 }

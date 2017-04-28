@@ -64,11 +64,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CloudMerger.Core\CloudMerger.Core.csproj">
+    <ProjectReference Include="..\..\CloudMerger.Core\CloudMerger.Core.csproj">
       <Project>{83233b96-0803-45d6-be22-7a3b31534f60}</Project>
       <Name>CloudMerger.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\hostings\MergedHosting\MergedHosting.csproj">
+    <ProjectReference Include="..\MergedHosting\MergedHosting.csproj">
       <Project>{4bbfdbfc-eb7e-4fe1-a589-c97bd802abc6}</Project>
       <Name>MergedHosting</Name>
     </ProjectReference>

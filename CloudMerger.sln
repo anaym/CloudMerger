@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMerger.Core.Test", "Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergedHosting", "hostings\MergedHosting\MergedHosting.csproj", "{4BBFDBFC-EB7E-4FE1-A589-C97BD802ABC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergedHosting.Test", "MergedHosting.Test\MergedHosting.Test.csproj", "{975C7FE7-18B4-43AA-9D6F-3E5FAF3AD210}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergedHosting.Test", "hostings\MergedHosting.Test\MergedHosting.Test.csproj", "{975C7FE7-18B4-43AA-9D6F-3E5FAF3AD210}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

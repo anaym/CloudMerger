@@ -109,6 +109,11 @@ namespace ConsoleApplication
 
         #endregion
 
+        public static void Log(object message, Exception ex)
+        {
+            log.Error(message, ex);
+        }
+
         private string[] GetParts(string line)
         {
             var match = commandRe.Match(line);
