@@ -81,8 +81,8 @@ namespace MergedHosting
                 throw new ItemNotFound();
             var directories = new Dictionary<string, ItemInfo>();
             var files = new Dictionary<string, ItemInfo>();
-            var contents = await Task.WhenAll(withDir.Select(h => h.GetDirectoryListAsync(path)));
-            foreach (var item in contents.SelectMany(c => c))
+            var content = await Task.WhenAll(withDir.Select(h => h.GetDirectoryListAsync(path)));
+            foreach (var item in content.SelectMany(c => c))
                     if (item.IsFile)
                     {
                         if (files.ContainsKey(item.Name))
@@ -207,16 +207,16 @@ namespace MergedHosting
         {
             var withDir = new List<IHosting>();
             var workedHostings = hostings.ToList();
-            var tasks = hostings.Select(h => h.IsDirectoryAsync(path).WithTimeOut(Timeout)).ToList();
+            var tasks = hostings.Select(h => h.TryGetItemInfoAsync(path)).ToList();
             while (tasks.Count > 0)
             {
                 var completed = await Task.WhenAny(tasks);
                 var hosting = workedHostings[tasks.IndexOf(completed)];
                 if (completed.IsFaultedWith<InconsistentFileSystemState>())
                     throw new InconsistentFileSystemState(completed.Exception?.InnerException);
-                if (!completed.IsFaulted)
+                if (!completed.IsFaulted && completed.Result != null)
                 {
-                    if (completed.Result)
+                    if (completed.Result.IsDirectory)
                         withDir.Add(hosting);
                     else
                         throw new UnexpectedItemType("Expected path to directory");

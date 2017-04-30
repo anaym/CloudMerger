@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using CloudMerger.Core.Primitives;
+using CloudMerger.Core.Tree;
 
 namespace CloudMerger.Core.Utility
 {
@@ -23,36 +25,56 @@ namespace CloudMerger.Core.Utility
 
         public static async Task<bool> IsDirectoryAsync(this IHosting hosting, UPath path)
         {
-            return !await hosting.IsFileOrUnexistAsync(path);
+
+            var result = (await hosting.TryGetItemInfoAsync(path))?.IsDirectory;
+            if (result != null)
+                return result.Value;
+            throw new ItemNotFound(path);
         }
 
         public static async Task<bool> IsFileAsync(this IHosting hosting, UPath path)
         {
-            return !await hosting.IsDirectoryOrUnexistAsync(path);
+            var result = (await hosting.TryGetItemInfoAsync(path))?.IsFile;
+            if (result != null)
+                return result.Value;
+            throw new ItemNotFound(path);
         }
 
         public static async Task<bool> IsDirectoryOrUnexistAsync(this IHosting hosting, UPath path)
         {
-            try
-            {
-                return (await hosting.GetItemInfoAsync(path)).IsDirectory;
-            }
-            catch (ItemNotFound)
-            {
-                return true;
-            }
+            return (await hosting.TryGetItemInfoAsync(path))?.IsDirectory ?? true;
         }
 
         public static async Task<bool> IsFileOrUnexistAsync(this IHosting hosting, UPath path)
         {
+            return (await hosting.TryGetItemInfoAsync(path))?.IsFile ?? true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hosting"></param>
+        /// <param name="path"></param>
+        /// <returns>ItemInfo if item exist or null if item is not founded</returns>
+        public static async Task<ItemInfo> TryGetItemInfoAsync(this IHosting hosting, UPath path)
+        {
             try
             {
-                return (await hosting.GetItemInfoAsync(path)).IsFile;
+                return await hosting.GetItemInfoAsync(path);
             }
             catch (ItemNotFound)
             {
-                return true;
+                return null;
             }
+        }
+
+        public static async Task<Node<ItemInfo>> GetItemsTreeAsync(this IHosting hosting, UPath path)
+        {
+            if (!await hosting.IsExistAsync(path))
+                throw new ItemNotFound();
+            if (await hosting.IsFileAsync(path))
+                return new Node<ItemInfo>(await hosting.GetItemInfoAsync(path));
+            return await hosting.GetDirectoryItemsTreeAsync(path);
         }
 
         public static async Task UploadFileAsync(this IHosting hosting, FileInfo source, UPath destination,
@@ -134,6 +156,21 @@ namespace CloudMerger.Core.Utility
             }
 
             await Task.WhenAll(tasks);
+        }
+
+        private static async Task<Node<ItemInfo>> GetDirectoryItemsTreeAsync(this IHosting hosting, UPath path)
+        {
+            var nested = (await hosting.GetDirectoryListAsync(path))
+                .Select(async i =>
+                {
+                    return i.IsDirectory
+                        ? await hosting.GetDirectoryItemsTreeAsync(i.Path)
+                        : new Node<ItemInfo>(await hosting.GetItemInfoAsync(i.Path));
+                }).ToList();
+            await Task.WhenAll(nested);
+            var node = new Node<ItemInfo>(await hosting.GetItemInfoAsync(path));
+            node.Nested.AddRange(nested.Select(n => n.Result));
+            return node;
         }
     }
 }

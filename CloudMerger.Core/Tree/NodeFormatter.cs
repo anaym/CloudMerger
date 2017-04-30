@@ -95,7 +95,7 @@ namespace CloudMerger.Core.Tree
             }
         }
 
-        public static string BuildNode(this NodeFormatter formatter, Node<string> node)
+        public static string BuildNodes(this NodeFormatter formatter, Node<string> node)
         {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));

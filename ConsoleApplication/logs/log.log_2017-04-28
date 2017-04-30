@@ -1,0 +1,458 @@
+[Start of logging]
+28.04.2017 07:35:15.025 ERROR    9 Error in command `help` System.ArgumentException: Unexpected command help`0. Use `help`
+   в ConsoleApplication.ConsoleApplication.Execute(String commandLine) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 52
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 31
+ 
+[Start of logging]
+28.04.2017 07:36:24.277 ERROR    8 Error in command `hjhhjh` System.ArgumentException: Unexpected command hjhhjh`0. Use `help`
+   в ConsoleApplication.ConsoleApplication.Execute(String commandLine) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 53
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 32
+ 
+28.04.2017 07:39:05.772 ERROR    8 Error in command `list m` CloudMerger.Core.ItemNotFound
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__1.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 22
+ 
+[Start of logging]
+28.04.2017 07:45:47.712 FATAL   10 Fatal error, application stopped System.Exception: fer
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 26
+   в ConsoleApplication.ConsoleApplication.Run(CommandsCollection commands) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 15
+   в ConsoleApplication.Program.Main(String[] args) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Program.cs:строка 53
+   в System.AppDomain._nExecuteAssembly(RuntimeAssembly assembly, String[] args)
+   в System.AppDomain.ExecuteAssembly(String assemblyFile, Evidence assemblySecurity, String[] args)
+   в Microsoft.VisualStudio.HostingProcess.HostProc.RunUsersAssembly()
+   в System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   в System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   в System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   в System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   в System.Threading.ThreadHelper.ThreadStart()
+ 
+[End of logging]
+
+[Start of logging]
+28.04.2017 07:45:54.007 FATAL    1 Fatal error, application stopped System.Exception: fer
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 26
+   в ConsoleApplication.ConsoleApplication.Run(CommandsCollection commands) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 15
+   в ConsoleApplication.Program.Main(String[] args) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Program.cs:строка 53
+ 
+[End of logging]
+
+[Start of logging]
+28.04.2017 07:46:24.407 FATAL    9 Fatal error, application stopped System.Exception: fer
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 26
+   в ConsoleApplication.ConsoleApplication.Run(CommandsCollection commands) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 15
+   в ConsoleApplication.Program.Main(String[] args) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Program.cs:строка 53
+   в System.AppDomain._nExecuteAssembly(RuntimeAssembly assembly, String[] args)
+   в System.AppDomain.ExecuteAssembly(String assemblyFile, Evidence assemblySecurity, String[] args)
+   в Microsoft.VisualStudio.HostingProcess.HostProc.RunUsersAssembly()
+   в System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   в System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   в System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   в System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   в System.Threading.ThreadHelper.ThreadStart()
+ 
+[End of logging]
+
+[Start of logging]
+28.04.2017 07:46:29.085 FATAL    1 Fatal error, application stopped System.Exception: fer
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 26
+   в ConsoleApplication.ConsoleApplication.Run(CommandsCollection commands) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 15
+   в ConsoleApplication.Program.Main(String[] args) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Program.cs:строка 53
+ 
+[End of logging]
+
+[Start of logging]
+28.04.2017 07:46:52.718 FATAL    1 Fatal error, application stopped System.Exception: fer
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 26
+   в ConsoleApplication.ConsoleApplication.Run(CommandsCollection commands) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 15
+   в ConsoleApplication.Program.Main(String[] args) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Program.cs:строка 53
+ 
+[End of logging]
+
+[Start of logging]
+28.04.2017 07:49:41.479 INFO    10 Executing 'help'  
+28.04.2017 07:49:41.490 INFO    10 Executing 'help' completed  
+[Start of logging]
+28.04.2017 07:50:31.303 INFO     8 Executing 'help'  
+28.04.2017 07:50:31.314 INFO     8 Executing 'help' completed  
+28.04.2017 07:50:35.054 INFO     8 Executing 'help'  
+28.04.2017 07:50:35.058 INFO     8 Executing 'help' completed  
+28.04.2017 07:50:47.574 INFO     8 Executing 'list /'  
+28.04.2017 07:51:18.229 INFO     8 Executing 'list /' completed  
+28.04.2017 07:51:25.054 INFO     8 Executing 'list /'  
+28.04.2017 07:51:27.060 INFO     8 Executing 'list /' completed  
+28.04.2017 07:51:39.359 INFO     8 Executing 'info 1Cv8.dt'  
+28.04.2017 07:51:40.097 INFO     8 Executing 'info 1Cv8.dt' completed  
+[Start of logging]
+28.04.2017 15:27:55.730 INFO     9 Executing 'l'  
+28.04.2017 15:28:22.875 INFO     9 Executing 'l' completed  
+28.04.2017 15:28:48.343 INFO     9 Executing 'l ^[aA]'  
+28.04.2017 15:28:49.702 ERROR    9 Error in command `l ^[aA]` CloudMerger.Core.ItemNotFound
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 29
+ 
+28.04.2017 15:28:52.824 INFO     9 Executing 'l / ^[aA]'  
+28.04.2017 15:28:54.683 INFO     9 Executing 'l / ^[aA]' completed  
+28.04.2017 15:29:05.687 INFO     9 Executing 'l / ^[b-z]'  
+28.04.2017 15:29:06.528 INFO     9 Executing 'l / ^[b-z]' completed  
+[Start of logging]
+28.04.2017 16:55:03.376 INFO     9 Executing 'upload G:\tt uploaded'  
+28.04.2017 16:55:31.772 ERROR    9 Error in command `upload G:\tt uploaded` CloudMerger.Core.HostUnavailable ---> Disk.SDK.SdkNotAuthorizedException: You must be logged in before starting to work with SDK, try to call AuthorizeAsync(...) at first
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в Disk.SDK.Utils.HttpAsyncUtilities.<SendFullRequest>d__1.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в Disk.SDK.DiskAsyncClient.<GetItemInfoAsync>d__5.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в YandexFileHosting.YandexHosting.<GetItemInfoAsync>d__5.MoveNext()
+   --- Конец трассировки внутреннего стека исключений ---
+   в YandexFileHosting.YandexHosting.<GetItemInfoAsync>d__5.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в YandexFileHosting.YandexHosting.<MakeDirectoryAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   в MergedHosting.MergedHosting.<MakeDirectoryAsync>d__8.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   в CloudMerger.Core.Utility.FileHostingHelper.<UploadDirectoryAsync>d__6.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\CloudMerger.Core\Utility\FileHostingHelper.cs:строка 73
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   в ConsoleApplication.FileHostingClient.<Upload>d__4.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 53
+ 
+28.04.2017 16:55:38.431 INFO     9 Executing 'list /'  
+28.04.2017 16:55:38.968 ERROR    9 Error in command `list /` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 31
+ 
+28.04.2017 16:55:44.487 INFO     9 Executing 'topology'  
+28.04.2017 16:55:50.971 INFO     9 Executing 'topology' completed  
+28.04.2017 16:55:51.639 INFO     9 Executing 'i'  
+[Start of logging]
+28.04.2017 16:57:12.448 INFO    10 Executing 'topologyu'  
+28.04.2017 16:57:12.459 ERROR   10 Error in command `topologyu` System.ArgumentException: Unexpected command topologyu`0. Use `help`
+   в ConsoleApplication.ConsoleApplication.Execute(String commandLine) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 64
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 37
+ 
+28.04.2017 16:57:13.487 INFO    10 Executing 'topology'  
+28.04.2017 16:57:17.902 INFO    10 Executing 'topology' completed  
+28.04.2017 16:57:19.375 INFO    10 Executing 'i'  
+[Start of logging]
+28.04.2017 16:58:16.680 INFO    10 Executing 'topology'  
+28.04.2017 16:58:20.696 INFO    10 Executing 'topology' completed  
+28.04.2017 16:58:22.279 INFO    10 Executing 'i'  
+28.04.2017 16:58:46.813 INFO    10 Executing 'i' completed  
+28.04.2017 16:59:22.983 INFO    10 Executing 'upload G:\tt uploaded'  
+28.04.2017 16:59:44.241 INFO    10 Executing 'upload G:\tt uploaded' completed  
+28.04.2017 16:59:53.959 INFO    10 Executing 'l uploaded'  
+28.04.2017 16:59:54.634 INFO    10 Executing 'l uploaded' completed  
+28.04.2017 17:00:06.471 INFO    10 Executing 'l uploaded/12341'  
+28.04.2017 17:00:07.925 INFO    10 Executing 'l uploaded/12341' completed  
+28.04.2017 17:00:20.983 INFO    10 Executing 'l uploaded/12342'  
+28.04.2017 17:00:22.398 INFO    10 Executing 'l uploaded/12342' completed  
+28.04.2017 17:00:25.367 INFO    10 Executing 'l uploaded/a'  
+28.04.2017 17:00:26.791 INFO    10 Executing 'l uploaded/a' completed  
+28.04.2017 17:01:18.215 INFO    10 Executing 'l'  
+28.04.2017 17:01:21.496 INFO    10 Executing 'l' completed  
+28.04.2017 17:01:24.359 INFO    10 Executing 'upload G:\tt uploaded'  
+28.04.2017 17:01:43.208 INFO    10 Executing 'upload G:\tt uploaded' completed  
+28.04.2017 17:02:04.183 INFO    10 Executing 'delete uploaded/12341/1.file'  
+28.04.2017 17:02:06.783 INFO    10 Executing 'delete uploaded/12341/1.file' completed  
+28.04.2017 17:02:19.111 INFO    10 Executing 'm uploaded/12341/1.file'  
+28.04.2017 17:02:20.893 INFO    10 Executing 'm uploaded/12341/1.file' completed  
+28.04.2017 17:02:23.671 INFO    10 Executing 'upload G:\tt uploaded'  
+28.04.2017 17:02:35.595 INFO    10 Executing 'upload G:\tt uploaded' completed  
+28.04.2017 17:03:42.039 INFO    10 Executing 'l /uploaded/12341'  
+28.04.2017 17:03:43.475 INFO    10 Executing 'l /uploaded/12341' completed  
+[Start of logging]
+28.04.2017 17:05:15.424 INFO     9 Executing 'u G:\tt uploaded'  
+28.04.2017 17:05:51.298 INFO     9 Executing 'u G:\tt uploaded' completed  
+[Start of logging]
+28.04.2017 17:34:06.016 INFO     8 Executing 'd uploaded G:/tt2'  
+28.04.2017 17:37:44.154 INFO     8 Executing 'd uploaded G:/tt2' completed  
+[Start of logging]
+28.04.2017 17:39:55.696 INFO     9 Executing 'd uploaded G:/tt3'  
+[Start of logging]
+28.04.2017 17:47:42.744 INFO     9 Executing 'd uploaded G:/tt4'  
+[Start of logging]
+28.04.2017 17:49:14.288 INFO    10 Executing 'd uploaded G:/tt5'  
+28.04.2017 17:49:49.236 INFO    10 Executing 'd uploaded G:/tt5' completed  
+[Start of logging]
+28.04.2017 17:51:42.024 INFO    10 Executing 'u G:/tt uploaded'  
+28.04.2017 17:52:24.791 INFO    10 Executing 'u G:/tt uploaded' completed  
+28.04.2017 17:52:51.583 INFO    10 Executing 'd uploaded G://ttd'  
+28.04.2017 17:53:03.718 INFO    10 Executing 'd uploaded G://ttd' completed  
+[Start of logging]
+28.04.2017 17:56:05.496 INFO     9 Executing 'd uploaded G:\\dd'  
+28.04.2017 17:56:39.624 INFO     9 Executing 'd uploaded G:\\dd' completed  
+28.04.2017 17:58:30.055 INFO     9 Executing 'i'  
+28.04.2017 17:58:52.254 INFO     9 Executing 'i' completed  
+[Start of logging]
+28.04.2017 18:00:00.648 INFO     9 Executing 'i'  
+28.04.2017 18:00:25.465 INFO     9 Executing 'i' completed  
+28.04.2017 18:01:44.279 INFO     9 Executing 'i'  
+28.04.2017 18:01:44.793 INFO     9 Executing 'i' completed  
+28.04.2017 18:01:59.263 INFO     9 Executing 'd uploaded G:/tdd'  
+28.04.2017 18:02:09.791 INFO     9 Executing 'd uploaded G:/tdd' completed  
+28.04.2017 18:03:16.863 INFO     9 Executing 'upload "C:\Users\Anton Tolstov\GitHub\cqlpad" cqlpad'  
+[Start of logging]
+28.04.2017 18:14:51.848 INFO    10 Executing 'i'  
+28.04.2017 18:15:23.512 INFO    10 Executing 'i' completed  
+28.04.2017 18:15:50.063 INFO    10 Executing 'u "C:\Users\Anton Tolstov\Desktop\yandex-disk-sdk-csharp" ydsdk'  
+[Start of logging]
+28.04.2017 18:29:46.912 INFO     8 Executing 'u "C:\Users\Anton Tolstov\Desktop\yandex-disk-sdk-csharp" ydsdk2'  
+28.04.2017 18:39:04.902 INFO     8 Executing 'u "C:\Users\Anton Tolstov\Desktop\yandex-disk-sdk-csharp" ydsdk2' completed  
+[Start of logging]
+28.04.2017 18:41:55.136 INFO    10 Executing 'l'  
+28.04.2017 18:42:58.482 INFO    10 Executing 'l' completed  
+28.04.2017 18:43:02.495 INFO    10 Executing 'l ydsdk'  
+28.04.2017 18:43:03.181 INFO    10 Executing 'l ydsdk' completed  
+28.04.2017 18:43:07.327 INFO    10 Executing 'i ydsdk'  
+28.04.2017 18:43:07.537 INFO    10 Executing 'i ydsdk' completed  
+28.04.2017 18:43:15.087 INFO    10 Executing 'l Samples'  
+28.04.2017 18:43:15.808 ERROR   10 Error in command `l Samples` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 31
+ 
+28.04.2017 18:43:27.775 INFO    10 Executing 'l ydsdk2/Samples'  
+28.04.2017 18:43:28.562 INFO    10 Executing 'l ydsdk2/Samples' completed  
+28.04.2017 18:43:34.207 INFO    10 Executing 'l ydsdk2/Samples/.vs'  
+28.04.2017 18:43:35.622 INFO    10 Executing 'l ydsdk2/Samples/.vs' completed  
+28.04.2017 18:43:46.559 INFO    10 Executing 'l ydsdk2/Samples/.vs/SdkSample.WPF'  
+28.04.2017 18:43:48.033 INFO    10 Executing 'l ydsdk2/Samples/.vs/SdkSample.WPF' completed  
+28.04.2017 18:43:52.871 INFO    10 Executing 'l ydsdk2/Samples/.vs/SdkSample.WPF/v14'  
+28.04.2017 18:43:54.339 INFO    10 Executing 'l ydsdk2/Samples/.vs/SdkSample.WPF/v14' completed  
+28.04.2017 18:44:00.759 INFO    10 Executing 'l ydsdk2/Samples'  
+28.04.2017 18:44:01.478 INFO    10 Executing 'l ydsdk2/Samples' completed  
+28.04.2017 18:44:05.031 INFO    10 Executing 'l ydsdk2'  
+28.04.2017 18:44:05.639 INFO    10 Executing 'l ydsdk2' completed  
+28.04.2017 18:44:09.767 INFO    10 Executing 'l ydsdk2/SDK'  
+28.04.2017 18:44:10.485 INFO    10 Executing 'l ydsdk2/SDK' completed  
+28.04.2017 18:44:19.143 INFO    10 Executing 'l ydsdk2/SDK/Disk.Sdk'  
+28.04.2017 18:44:19.783 INFO    10 Executing 'l ydsdk2/SDK/Disk.Sdk' completed  
+28.04.2017 18:44:33.135 INFO    10 Executing 'd ydsdk2 ydsdk2'  
+28.04.2017 18:47:30.019 INFO    10 Executing 'd ydsdk2 ydsdk2' completed  
+[Start of logging]
+28.04.2017 18:51:54.160 INFO     8 Executing 'i'  
+28.04.2017 18:52:18.665 INFO     8 Executing 'i' completed  
+28.04.2017 18:52:39.039 INFO     8 Executing 'upload "C:\Users\Anton Tolstov\Desktop\yandex-disk-sdk-csharp" ydsdk3'  
+28.04.2017 19:00:43.974 INFO     8 Executing 'upload "C:\Users\Anton Tolstov\Desktop\yandex-disk-sdk-csharp" ydsdk3' completed  
+28.04.2017 19:01:41.431 INFO     8 Executing 'd ydsdk3 ydsdk3'  
+28.04.2017 19:04:38.930 INFO     8 Executing 'd ydsdk3 ydsdk3' completed  
+[Start of logging]
+28.04.2017 19:06:46.168 INFO    10 Executing 'i'  
+28.04.2017 19:07:11.029 INFO    10 Executing 'i' completed  
+28.04.2017 19:07:41.183 INFO    10 Executing 'u "C:\Users\Anton Tolstov\Desktop\yandex-disk-sdk-csharp" ydsdk4'  
+28.04.2017 19:14:52.836 INFO    10 Executing 'u "C:\Users\Anton Tolstov\Desktop\yandex-disk-sdk-csharp" ydsdk4' completed  
+28.04.2017 19:15:16.359 INFO    10 Executing 'l'  
+28.04.2017 19:15:19.259 INFO    10 Executing 'l' completed  
+28.04.2017 19:15:33.263 INFO    10 Executing 'd ydsdk4 ydsdk4'  
+28.04.2017 19:18:24.084 INFO    10 Executing 'd ydsdk4 ydsdk4' completed  
+28.04.2017 19:19:32.239 INFO    10 Executing 'u "C:\Users\Anton Tolstov\GitHub\clone" clone'  
+28.04.2017 19:24:09.251 INFO    10 Executing 'u "C:\Users\Anton Tolstov\GitHub\clone" clone' completed  
+[Start of logging]
+28.04.2017 19:30:24.064 INFO    10 Executing 'i'  
+28.04.2017 19:30:48.712 INFO    10 Executing 'i' completed  
+28.04.2017 19:31:08.872 INFO    10 Executing 'kl'  
+28.04.2017 19:31:08.895 ERROR   10 Error in command `kl` System.ArgumentException: Unexpected command kl`0. Use `help`
+   в ConsoleApplication.ConsoleApplication.Execute(String commandLine) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 64
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 37
+ 
+28.04.2017 19:31:10.399 INFO    10 Executing 'l'  
+28.04.2017 19:31:17.945 INFO    10 Executing 'l' completed  
+28.04.2017 19:31:21.655 INFO    10 Executing 'delete cqlpad'  
+28.04.2017 19:31:25.808 INFO    10 Executing 'delete cqlpad' completed  
+[Start of logging]
+28.04.2017 19:59:51.376 INFO     8 Executing 'i'  
+28.04.2017 20:00:18.790 INFO     8 Executing 'i' completed  
+28.04.2017 20:00:27.471 INFO     8 Executing 'help'  
+28.04.2017 20:00:27.478 INFO     8 Executing 'help' completed  
+28.04.2017 20:00:30.695 INFO     8 Executing 'tree /'  
+[Start of logging]
+28.04.2017 20:05:18.760 INFO    10 Executing 'i'  
+28.04.2017 20:05:43.212 INFO    10 Executing 'i' completed  
+28.04.2017 20:05:59.199 INFO    10 Executing 'l'  
+28.04.2017 20:06:02.354 INFO    10 Executing 'l' completed  
+28.04.2017 20:06:09.015 INFO    10 Executing 'tree A'  
+28.04.2017 20:06:10.553 ERROR   10 Error in command `tree A` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в CloudMerger.Core.Utility.FileHostingHelper.<GetDirectoryItemsTreeAsync>d__10.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\CloudMerger.Core\Utility\FileHostingHelper.cs:строка 152
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в CloudMerger.Core.Utility.FileHostingHelper.<GetItemsTreeAsync>d__5.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\CloudMerger.Core\Utility\FileHostingHelper.cs:строка 66
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<Tree>d__11.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 134
+ 
+28.04.2017 20:06:15.991 INFO    10 Executing 'A'  
+28.04.2017 20:06:15.997 ERROR   10 Error in command `A` System.ArgumentException: Unexpected command a`0. Use `help`
+   в ConsoleApplication.ConsoleApplication.Execute(String commandLine) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 64
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 37
+ 
+28.04.2017 20:06:18.239 INFO    10 Executing 'i A'  
+28.04.2017 20:06:18.667 INFO    10 Executing 'i A' completed  
+[Start of logging]
+28.04.2017 20:08:29.968 INFO     9 Executing 'i'  
+28.04.2017 20:08:54.393 INFO     9 Executing 'i' completed  
+28.04.2017 20:09:10.983 INFO     9 Executing 'l A'  
+28.04.2017 20:09:11.605 ERROR    9 Error in command `l A` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 32
+ 
+28.04.2017 20:09:16.359 INFO     9 Executing 'l'  
+28.04.2017 20:09:22.817 INFO     9 Executing 'l' completed  
+28.04.2017 20:09:23.047 INFO     9 Executing ''  
+28.04.2017 20:09:23.053 ERROR    9 Error in command `` System.FormatException: Invalid line format: ``
+   в ConsoleApplication.ConsoleApplication.GetParts(String line) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 121
+   в ConsoleApplication.ConsoleApplication.Execute(String commandLine) в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 58
+   в ConsoleApplication.ConsoleApplication.Run() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\Infrastructure\ConsoleApplication.cs:строка 37
+ 
+28.04.2017 20:09:34.479 INFO     9 Executing 'l "Emty dit"'  
+28.04.2017 20:09:35.096 ERROR    9 Error in command `l "Emty dit"` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 32
+ 
+28.04.2017 20:09:47.223 INFO     9 Executing 'l "Empty dit"'  
+28.04.2017 20:09:47.877 ERROR    9 Error in command `l "Empty dit"` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 32
+ 
+28.04.2017 20:09:52.591 INFO     9 Executing 'l "Empty dir"'  
+28.04.2017 20:09:53.177 ERROR    9 Error in command `l "Empty dir"` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 32
+ 
+28.04.2017 20:09:58.743 INFO     9 Executing 'l /'  
+28.04.2017 20:09:59.381 INFO     9 Executing 'l /' completed  
+28.04.2017 20:10:02.687 INFO     9 Executing 'l /A'  
+28.04.2017 20:10:03.260 ERROR    9 Error in command `l /A` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 32
+ 
+28.04.2017 20:10:05.504 INFO     9 Executing 'l /A/'  
+28.04.2017 20:10:06.081 ERROR    9 Error in command `l /A/` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 32
+ 
+28.04.2017 20:10:27.559 INFO     9 Executing 'l /A/'  
+28.04.2017 20:10:32.444 ERROR    9 Error in command `l /A/` CloudMerger.Core.UnexpectedItemType: Expected path to directory
+   в MergedHosting.MergedHosting.<GetHostingsWithDirectory>d__16.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в MergedHosting.MergedHosting.<GetDirectoryListAsync>d__7.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в ConsoleApplication.FileHostingClient.<List>d__2.MoveNext() в C:\Users\Anton Tolstov\GitHub\CloudMerger\ConsoleApplication\FileHostingClient.cs:строка 32
+ 
+28.04.2017 20:10:49.648 INFO     9 Executing 'l /A/'  

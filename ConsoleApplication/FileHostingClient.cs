@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CloudMerger.Core;
 using CloudMerger.Core.Primitives;
+using CloudMerger.Core.Tree;
 using CloudMerger.Core.Utility;
 
 namespace ConsoleApplication
@@ -125,6 +126,14 @@ namespace ConsoleApplication
                 await Hosting.RemoveDirectoryAsync(path, true);
             else
                 await Hosting.RemoveFileAsync(path);
+        }
+
+        [Command]
+        public async Task Tree(string path)
+        {
+            var root = await Hosting.GetItemsTreeAsync(path);
+            var formatter = new NodeFormatter('=');
+            Console.WriteLine(formatter.BuildNodes(root.Select(n => n.Name)));
         }
 
         private IHosting Hosting
