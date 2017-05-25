@@ -99,7 +99,7 @@ namespace CloudMerger.Core.Utility
         {
             if (!await hosting.IsDirectoryAsync(destination.Parent))
                 throw new UnexpectedItemType("Parent of destination should be directory");
-            if (await hosting.IsFileAsync(destination))
+            if (!await hosting.IsDirectoryOrUnexistAsync(destination))
                 throw new UnexpectedItemType("Destination should be a directory");
             await hosting.MakeDirectoryAsync(destination);
 
